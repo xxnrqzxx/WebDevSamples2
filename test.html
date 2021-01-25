@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HaHaHa</title>
+        <style>
+            body {
+                /* overflow: hidden; */
+                margin: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <audio controls autoplay>
+            <source src="uranidiot.mp3" type="audio/mp3">
+                test
+        </audio>
+        <video width="320" height="240" autoplay muted>
+            <source src="uranidiot.mp4" type="video/mp4">
+        </video>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+       document.addEventListener('DOMContentLoaded', ()=> {
+            var x = document.querySelector("audio");
+            x.play();
+        });
+    </script>
+    </body>
+</html>

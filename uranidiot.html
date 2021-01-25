@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>You are an Idiot</title>
+        <style>
+            body {
+                overflow: hidden;
+                margin: 0px;
+            }
+
+            div {
+                width: 1200px;
+                margin-top: 23%;
+                margin-right: auto;
+                margin-left: auto;
+                margin-bottom: auto;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1>YOU ARE AN IDIOT<br>☺☺☺</h1>
+        </div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+         $(document).ready(function() {
+             var myWindow = window.open("test.html","_blank", "width=320, height=240");
+        })
+        setInterval(change, 400);
+        function change() {
+            const msg = document.querySelector("div");
+            if(msg.style.color === "" || msg.style.color === "black") {
+                msg.style.color = "white";
+                document.body.style.backgroundColor = "black";
+            } else if(msg.style.color === "white") {
+                msg.style.color = "black";
+                document.body.style.backgroundColor = "white";
+            }
+        }
+        
+    </script>
+</html>
