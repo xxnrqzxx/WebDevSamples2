@@ -6,6 +6,7 @@
         <title>Toggle</title>
         <style>
             body {
+                margin: 0px;
                 overflow: hidden;
                 transition: all 0.5s ease;
             }
@@ -95,8 +96,7 @@
                 } else {
                     $(".button").removeClass("toggled");
                     $(".button").addClass("toggling");
-                    $(".toggle").addClass("toggling");
-                    
+                    $(".toggle").addClass("toggling");     
 
                     setTimeout(function() {
                         $(".toggle").removeClass("toggling");
