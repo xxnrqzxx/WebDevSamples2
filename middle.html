@@ -86,7 +86,7 @@
             <p>Entry must not be less than 3 characters</p>
         </div>
         <div class="contents">
-            <input class="input" type="text" placeholder="Type here">
+            <input class="input" type="text" placeholder="Type here" onkeypress="checkEnterKey(event)">
             <button class="btn" type="button">Check</button>
             <h1 class="result">Find the middle characters of a string</h1>
         </div>
@@ -97,7 +97,15 @@
         var error = document.querySelector(".empty");
         var less = document.querySelector(".less");
 
-        submit.addEventListener("click", ()=>{
+        submit.addEventListener("click", submitInput);
+
+        function checkEnterKey(e) {
+            if(e.keyCode == 13) {
+                submitInput();
+            }
+        }
+        
+        function submitInput() {
             var x = input.value
             var y = x.split('');
             var middle;
@@ -115,12 +123,12 @@
                 }, 3000);
             } else if(y.length % 2 != 0){
                 middle = Math.round(y.length/2);
-                result.innerHTML = "Middle character of the word <em>'"+x+"'</em> is <em>'"+y[middle-1]+"'</em>";
+                result.innerHTML = "Middle character of the string <em>'"+x+"'</em> is <em>'"+y[middle-1]+"'</em>";
             } else {
                 middle = y.length/2;
-                result.innerHTML = "Middle characters of the word <em>'"+x+"'</em> is <em>'"+y[middle-1]+"'</em> and <em>'"+y[middle]+"'</em>";
+                result.innerHTML = "Middle characters of the string <em>'"+x+"'</em> is <em>'"+y[middle-1]+"'</em> and <em>'"+y[middle]+"'</em>";
             }
-        })
+        }
 
         input.addEventListener("input", (evt)=>{
             result.innerHTML = "Find the middle characters of a string";
