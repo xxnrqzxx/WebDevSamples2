@@ -71,7 +71,7 @@
             <p>Entry must not be less than 3, zero or empty</p>
         </div>
         <div class="contents">
-            <h1>Sum of numbers 1 to <input class="input" type="number" placeholder="X"/> divisible by 3 or 5</h1>
+            <h1>Sum of numbers 1 to <input class="input" type="number" placeholder="X" onkeypress="checkEnterKey(event)"/> divisible by 3 or 5</h1>
             <h1>is</h1>
             <h1 class="result">X</h1>
             <p class="num"></p>
@@ -82,50 +82,55 @@
         var result = document.querySelector(".result");
         var input = document.querySelector(".input");
         var numbers = document.querySelector(".num");
-        document.addEventListener("DOMContentLoaded", ()=>{
-            submit.addEventListener("click", ()=>{
-                var x = document.querySelector(".input").value;
-                var error = document.querySelector(".empty");
-                var temp = 0;
-                var temp2 = 0;
-                if(x === "" || x <= 2) {
-                    error.className += " trigger";
 
-                    setTimeout(function() {
-                        error.classList.remove("trigger");
-                    }, 3000);
-                } else {
-                    var num = [];
-                    for(i=1; i<=x; i++) {
-                        temp = i;
-                        if(temp%3 == 0 || temp%5 == 0){
-                            temp2+=temp;
-                            num.push(temp);
-                        }
-                    }
+        submit.addEventListener("click", submitInput);
 
-                    console.log(num);
+        function checkEnterKey(e) {
+            if(e.keyCode == 13) {
+                submitInput();
+            }
+        }
 
-                    result.innerHTML = temp2;
-                }
+        function submitInput() {
+            var x = document.querySelector(".input").value;
+            var error = document.querySelector(".empty");
+            var temp = 0;
+            var temp2 = 0;
+            if(x === "" || x <= 2) {
+                error.className += " trigger";
 
-                for(i=0; i<num.length; i++){
-                    if(i==0){
-                        numbers.innerHTML += "Sum = ";
-                    }
-                    numbers.innerHTML += num[i];
-                    if(i<num.length-1) {
-                        numbers.innerHTML += " + ";
+                setTimeout(function() {
+                    error.classList.remove("trigger");
+                }, 3000);
+            } else {
+                var num = [];
+                for(i=1; i<=x; i++) {
+                    temp = i;
+                    if(temp%3 == 0 || temp%5 == 0){
+                        temp2+=temp;
+                        num.push(temp);
                     }
                 }
 
-                num = [];
-            })
+                result.innerHTML = temp2;
+            }
 
-            input.addEventListener("input", (evt)=> {
-                result.innerHTML = "X";
-                numbers.innerHTML = "";
-            })
+            for(i=0; i<num.length; i++){
+                if(i==0){
+                    numbers.innerHTML += "Sum = ";
+                }
+                numbers.innerHTML += num[i];
+                if(i<num.length-1) {
+                    numbers.innerHTML += " + ";
+                }
+            }
+
+            num = [];
+        }
+
+        input.addEventListener("input", (evt)=> {
+            result.innerHTML = "X";
+            numbers.innerHTML = "";
         })
     </script>
     </body>
