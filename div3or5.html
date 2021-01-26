@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Divisible by 3 or 5</title>
+    </head>
+    <body>
+        <h1></h1>
+        <input class="input" type="text" />
+        <button class="btn" type="button">Get Sum</button>
+    <script>
+        var submit = document.querySelector(".btn");
+        document.addEventListener("DOMContentLoaded", ()=>{
+            submit.addEventListener("click", ()=>{
+                var x = document.querySelector(".input").value;
+                var temp = 0;
+                var temp2 = 0;
+                for(i=1; i<=x; i++) {
+                    temp = i;
+                    temp2+=temp;
+                }
+                alert(temp2);
+            })
+        })
+    </script>
+    </body>
+</html>
