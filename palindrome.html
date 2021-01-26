@@ -4,34 +4,110 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Palindrome</title>
+        <style>
+            body {
+                font-family:Arial, Helvetica, sans-serif;
+            }
+
+            .contents {
+                text-align: center;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+            }
+
+            .result {
+                font-size: 50px;
+            }
+
+            .input {
+                border-radius: 15px;
+                border: 2px solid blue;
+                text-align: center;
+                font-size: 35px;
+                height: 60px;
+            }
+
+            .btn {
+                font-size: 35px;
+                border-radius: 15px;
+                padding: 10px;
+                border: 2px solid black;
+            }
+
+            .btn:active {
+                background-color: gray;
+                color: white;
+            }
+
+            .empty {
+                opacity: 0;
+                position: absolute;
+                left: 50%;
+                top: -10%;
+                transform: translate(-50%, 0%);
+                border-radius: 15px;
+                padding: 10px;
+                font-size: 20px;
+                background-color: pink;
+                color: red;
+                transition: all 0.3s ease;
+            }
+
+            .empty.trigger {
+                opacity: 1;
+                top: 10%;
+                transition: all 0.3s ease;
+            }
+        </style>
     </head>
     <body>
-        <input class="input" type="text">
-        <button class="btn" type="button">Check</button>
-        <div class="result">Is it a palindrome?</div>
+        <div class="empty">
+            <p>Entry must not be empty</p>
+        </div>
+        <div class="contents">
+            <input class="input" type="text" placeholder="Type here">
+            <button class="btn" type="button">Check</button>
+            <h1 class="result">Is it a palindrome?</h1>
+        </div>
     <script>
         var result = document.querySelector(".result");
         var submit = document.querySelector(".btn");
+        var input = document.querySelector(".input");
         submit.addEventListener("click", ()=>{
-            var input = document.querySelector(".input");
+            var error = document.querySelector(".empty");
             var x = input.value;
             var y = x.toLowerCase();
             var z = y.split('');
             let arr = z.filter(function(e) {
                 return e != " ";
             })
-            console.log(arr);
-            for(i=1; i<=arr.length; i++) {
-                if(arr[i-1] === arr[arr.length-i]){
-                    if(i == arr.length) {
-                        result.innerHTML = x+" is a palindrome";
+            
+            if(x==="" || x===" "){
+                error.className += " trigger";
+
+                setTimeout(function() {
+                    error.classList.remove("trigger");
+                }, 3000);
+            } else {
+                for(i=1; i<=arr.length; i++) {
+                    if(arr[i-1] === arr[arr.length-i]){
+                        if(i == arr.length) {
+                            result.innerHTML = "'"+x+"' is a palindrome";
+                        }
+                    } else {
+                        result.innerHTML = "'"+x+"' is not a palindrome";
+                        break;
                     }
-                } else {
-                    result.innerHTML = x+" is not a palindrome";
-                    break;
                 }
             }
         })  
+        
+        input.addEventListener("input", (evt)=> {
+                result.innerHTML = "Is it a palindrome?";
+        })
     </script>
     </body>
 </html>
