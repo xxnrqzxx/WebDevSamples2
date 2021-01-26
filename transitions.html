@@ -17,6 +17,18 @@
             transition: all 0.3s ease;
         }
 
+        .image > img {
+            width: 900px;
+            height: auto;
+        }
+
+        .image {
+            position: absolute;
+            left: 52%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
         .button {
             z-index: 4;
             margin-left: 0%;
@@ -52,12 +64,35 @@
             background-color: black;
             transition: all 0.3s ease;
         }
+
+        @media only screen and (max-width: 900px) and (max-height: 900px) {
+            .toggle {
+                width: 50px;
+                height: 25px;
+            }
+
+            .button {
+                width: 25px;
+                height: 25px;
+            }
+            .button.toggled {
+                width: 25px;
+                height: 25px;
+            }
+            .image > img {
+                width: 350px;
+                height: auto;
+            }
+        }
     </style>
     <body>
         <div class="bg">
         </div>
         <div class="toggle">
             <div class="button"></div>
+        </div>
+        <div class="image">
+            <img src="darkmode.png">
         </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -68,7 +103,6 @@
                     $(".bg").addClass("expanded");
                     $(".button").css("background-color", "white");
                     $(".toggle").css("border-color", "white");
-                    alert(window.innerWidth+" "+window.innerHeight);
                     var w = window.innerWidth+500;
                     var h = window.innerHeight+500;
                     $(".expanded").css("width", w.toString());
