@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Middle Letters</title>
+        <style>
+            body {
+                font-family:Arial, Helvetica, sans-serif;
+            }
+
+            .contents {
+                text-align: center;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+            }
+
+            .input {
+                text-align: center;
+                font-size: 50px;
+                border-radius: 15px;
+                border: 2px solid blue;
+            }
+
+            .btn {
+                font-size: 40px;
+                border-radius: 15px;
+                border: 2px solid black;
+                padding: 10px;
+            }
+
+            .btn:active {
+                color: white;
+                background-color: gray;
+            }
+
+            .empty {
+                opacity: 0;
+                position: absolute;
+                left: 50%;
+                top: -10%;
+                transform: translate(-50%, 0%);
+                border-radius: 15px;
+                padding: 10px;
+                font-size: 20px;
+                background-color: pink;
+                color: red;
+                transition: all 0.3s ease;
+            }
+
+            .empty.trigger {
+                opacity: 1;
+                top: 10%;
+                transition: all 0.3s ease;
+            }
+
+            .less {
+                opacity: 0;
+                position: absolute;
+                left: 50%;
+                top: -10%;
+                transform: translate(-50%, 0%);
+                border-radius: 15px;
+                padding: 10px;
+                font-size: 20px;
+                background-color: pink;
+                color: red;
+                transition: all 0.3s ease;
+            }
+
+            .less.trigger {
+                opacity: 1;
+                top: 10%;
+                transition: all 0.3s ease;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="empty">
+            <p>Entry must not be empty</p>
+        </div>
+        <div class="less">
+            <p>Entry must not be less than 3 characters</p>
+        </div>
+        <div class="contents">
+            <input class="input" type="text" placeholder="Type here">
+            <button class="btn" type="button">Check</button>
+            <h1 class="result">Find the middle characters of a string</h1>
+        </div>
+    <script>
+        var input = document.querySelector(".input");
+        var submit = document.querySelector(".btn");
+        var result = document.querySelector(".result");
+        var error = document.querySelector(".empty");
+        var less = document.querySelector(".less");
+
+        submit.addEventListener("click", ()=>{
+            var x = input.value
+            var y = x.split('');
+            var middle;
+            if(x === "" || x === " ") {
+                error.className += " trigger";
+
+                setTimeout(function() {
+                    error.classList.remove("trigger");
+                }, 3000);
+            } else if(y.length < 3){
+                less.className += " trigger";
+
+                setTimeout(function() {
+                    less.classList.remove("trigger");
+                }, 3000);
+            } else if(y.length % 2 != 0){
+                middle = Math.round(y.length/2);
+                result.innerHTML = "Middle character of the word <em>'"+x+"'</em> is <em>'"+y[middle-1]+"'</em>";
+            } else {
+                middle = y.length/2;
+                result.innerHTML = "Middle characters of the word <em>'"+x+"'</em> is <em>'"+y[middle-1]+"'</em> and <em>'"+y[middle]+"'</em>";
+            }
+        })
+
+        input.addEventListener("input", (evt)=>{
+            result.innerHTML = "Find the middle characters of a string";
+        })
+    </script>
+    </body>
+</html>
