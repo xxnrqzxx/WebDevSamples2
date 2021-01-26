@@ -68,7 +68,7 @@
             <p>Entry must not be empty</p>
         </div>
         <div class="contents">
-            <input class="input" type="text" placeholder="Type here">
+            <input class="input" type="text" placeholder="Type here" onkeypress="checkEnterKey(event)">
             <button class="btn" type="button">Check</button>
             <h1 class="result">Is it a palindrome?</h1>
         </div>
@@ -76,7 +76,16 @@
         var result = document.querySelector(".result");
         var submit = document.querySelector(".btn");
         var input = document.querySelector(".input");
-        submit.addEventListener("click", ()=>{
+
+        submit.addEventListener("click", submitInput);
+
+        function checkEnterKey(e) {
+            if(e.keyCode == 13) {
+                submitInput();
+            }
+        }
+        
+        function submitInput() {
             var error = document.querySelector(".empty");
             var x = input.value;
             var y = x.toLowerCase();
@@ -103,7 +112,7 @@
                     }
                 }
             }
-        })  
+        }
         
         input.addEventListener("input", (evt)=> {
                 result.innerHTML = "Is it a palindrome?";
