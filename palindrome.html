@@ -56,7 +56,21 @@
                 transition: all 0.3s ease;
             }
 
-            .empty.trigger {
+            .symbols {
+                opacity: 0;
+                position: absolute;
+                left: 50%;
+                top: -10%;
+                transform: translate(-50%, 0%);
+                border-radius: 15px;
+                padding: 10px;
+                font-size: 20px;
+                background-color: pink;
+                color: red;
+                transition: all 0.3s ease;
+            }
+
+            .trigger {
                 opacity: 1;
                 top: 10%;
                 transition: all 0.3s ease;
@@ -66,6 +80,9 @@
     <body>
         <div class="empty">
             <p>Entry must not be empty</p>
+        </div>
+        <div class="symbols">
+            <p>Entry must not be all symbols</p>
         </div>
         <div class="contents">
             <input class="input" type="text" placeholder="Type here" onkeypress="checkEnterKey(event)">
@@ -87,25 +104,32 @@
         
         function submitInput() {
             var error = document.querySelector(".empty");
-            var x = input.value;
-            var y = x.toLowerCase();
-            var z = y.replace(/\W|/g, "").replace(/_/g,"");
-            var arr = z.split('');
+            var symbol = document.querySelector(".symbols");
+            var value = input.value;
+            var lowerValue = value.toLowerCase();
+            var filterValue = lowerValue.replace(/\W|/g, "").replace(/_/g,"");
+            var arr = filterValue.split('');
             
-            if(x==="" || x===" "){
+            if(value==="" || value===" "){
                 error.className += " trigger";
 
                 setTimeout(function() {
                     error.classList.remove("trigger");
                 }, 3000);
+            } else if (filterValue === "" || filterValue === " ") {
+                symbol.className += " trigger";
+
+                setTimeout(function() {
+                    symbol.classList.remove("trigger");
+                }, 3000);
             } else {
                 for(i=1; i<=arr.length; i++) {
                     if(arr[i-1] === arr[arr.length-i]){
                         if(i == arr.length) {
-                            result.innerHTML = "<em>'"+x+"'</em> is a palindrome";
+                            result.innerHTML = "<em>'"+value+"'</em> is a palindrome";
                         }
                     } else {
-                        result.innerHTML = "<em>'"+x+"'</em> is NOT a palindrome";
+                        result.innerHTML = "<em>'"+value+"'</em> is NOT a palindrome";
                         break;
                     }
                 }
