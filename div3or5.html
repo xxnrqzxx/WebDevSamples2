@@ -92,11 +92,11 @@
         }
 
         function submitInput() {
-            var x = document.querySelector(".input").value;
+            var value = document.querySelector(".input").value;
             var error = document.querySelector(".empty");
             var temp = 0;
             var temp2 = 0;
-            if(x === "" || x <= 2) {
+            if(value === "" || value <= 2) {
                 error.className += " trigger";
 
                 setTimeout(function() {
@@ -104,7 +104,7 @@
                 }, 3000);
             } else {
                 var num = [];
-                for(i=1; i<=x; i++) {
+                for(i=1; i<=value; i++) {
                     temp = i;
                     if(temp%3 == 0 || temp%5 == 0){
                         temp2+=temp;
