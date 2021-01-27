@@ -51,12 +51,6 @@
                 transition: all 0.3s ease;
             }
 
-            .empty.trigger {
-                opacity: 1;
-                top: 10%;
-                transition: all 0.3s ease;
-            }
-
             .less {
                 opacity: 0;
                 position: absolute;
@@ -71,7 +65,7 @@
                 transition: all 0.3s ease;
             }
 
-            .less.trigger {
+            .trigger {
                 opacity: 1;
                 top: 10%;
                 transition: all 0.3s ease;
@@ -106,27 +100,27 @@
         }
         
         function submitInput() {
-            var x = input.value
-            var y = x.split('');
+            var value = input.value
+            var arr = value.split('');
             var middle;
-            if(x === "" || x === " ") {
+            if(value === "" || value === " ") {
                 error.className += " trigger";
 
                 setTimeout(function() {
                     error.classList.remove("trigger");
                 }, 3000);
-            } else if(y.length < 3){
+            } else if(arr.length < 3){
                 less.className += " trigger";
 
                 setTimeout(function() {
                     less.classList.remove("trigger");
                 }, 3000);
-            } else if(y.length % 2 != 0){
-                middle = Math.round(y.length/2);
-                result.innerHTML = "Middle character of the string <em>'"+x+"'</em> is <em>'"+y[middle-1]+"'</em>";
+            } else if(arr.length % 2 != 0){
+                middle = Math.round(arr.length/2);
+                result.innerHTML = "Middle character of the string <em>'"+value+"'</em> is <em>'"+arr[middle-1]+"'</em>";
             } else {
-                middle = y.length/2;
-                result.innerHTML = "Middle characters of the string <em>'"+x+"'</em> is <em>'"+y[middle-1]+"'</em> and <em>'"+y[middle]+"'</em>";
+                middle = arr.length/2;
+                result.innerHTML = "Middle characters of the string <em>'"+value+"'</em> is <em>'"+arr[middle-1]+"'</em> and <em>'"+arr[middle]+"'</em>";
             }
         }
 
