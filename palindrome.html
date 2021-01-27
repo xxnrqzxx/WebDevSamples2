@@ -89,10 +89,8 @@
             var error = document.querySelector(".empty");
             var x = input.value;
             var y = x.toLowerCase();
-            var z = y.split('');
-            let arr = z.filter(function(e) {
-                return e != " ";
-            })
+            var z = y.replace(/\W|/g, "").replace(/_/g,"");
+            var arr = z.split('');
             
             if(x==="" || x===" "){
                 error.className += " trigger";
@@ -104,10 +102,10 @@
                 for(i=1; i<=arr.length; i++) {
                     if(arr[i-1] === arr[arr.length-i]){
                         if(i == arr.length) {
-                            result.innerHTML = "'"+x+"' is a palindrome";
+                            result.innerHTML = "<em>'"+x+"'</em> is a palindrome";
                         }
                     } else {
-                        result.innerHTML = "'"+x+"' is not a palindrome";
+                        result.innerHTML = "<em>'"+x+"'</em> is NOT a palindrome";
                         break;
                     }
                 }
