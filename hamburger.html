@@ -60,6 +60,12 @@
         </style>
     </head>
     <body>
+        <audio class="ham">
+            <source src="hamburger.mp3" type="audio/mpeg">
+        </audio>
+        <audio class="burger">
+            <source src="burgerham.mp3" type="audio/mpeg">
+        </audio>
         <div class="hamburger">
             <div class="line one"></div>
             <div class="line two"></div>
@@ -70,9 +76,11 @@
         $(document).ready(function() {
             $(".hamburger").click(function() {
                 if(!$(".line").hasClass("toggle")) {
+                    $(".ham").get(0).play();
                     $(".line").addClass("toggle");
                     $(".hamburger").addClass("clicked");
                 } else {
+                    $(".burger").get(0).play();
                     $(".line").removeClass("toggle");
                     $(".hamburger").removeClass("clicked");
                 }
