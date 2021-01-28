@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hamburger</title>
+        <style>
+            .hamburger {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                height: 98px;
+                width: 98px;
+                background-color: black;
+                padding: 10px;
+                transition: all 0.5s ease;
+                cursor: pointer;
+            }
+
+            .hamburger.clicked {
+                background-color: red;
+            }
+
+            .line {
+                /* position: relative; */
+                opacity: 1;
+                height: 15px;
+                width: auto;
+                margin-bottom: 25px;
+                background-color: white;
+                transition: all 0.5s ease;
+            }
+
+            .one.toggle {
+                position: relative;
+                top: 40%;
+                z-index: -1;
+                transform: rotate(45deg);
+                transition: all 0.5s ease;
+            }
+
+            .three.toggle {
+                opacity: 0;
+                transition: all 0.5s ease;
+            }
+
+            .two.toggle {
+                position: relative;
+                z-index: 1;
+                transform: rotate(-45deg);
+                transition: all 0.5s ease;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="hamburger">
+            <div class="line one"></div>
+            <div class="line two"></div>
+            <div class="line three"></div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".hamburger").click(function() {
+                if(!$(".line").hasClass("toggle")) {
+                    $(".line").addClass("toggle");
+                    $(".hamburger").addClass("clicked");
+                } else {
+                    $(".line").removeClass("toggle");
+                    $(".hamburger").removeClass("clicked");
+                }
+            })
+        });
+    </script>
+    </body>
+</html>
