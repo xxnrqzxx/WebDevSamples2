@@ -6,25 +6,33 @@
         <title>HaHaHa</title>
         <style>
             body {
-                /* overflow: hidden; */
+                overflow: hidden;
                 margin: 0px;
+            }
+
+            h1 {
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 200px;
             }
         </style>
     </head>
     <body>
-        <audio controls autoplay>
-            <source src="uranidiot.mp3" type="audio/mp3">
-                test
-        </audio>
-        <video width="320" height="240" autoplay muted>
-            <source src="uranidiot.mp4" type="video/mp4">
-        </video>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <h1>☺</h1>
     <script>
-       document.addEventListener('DOMContentLoaded', ()=> {
-            var x = document.querySelector("audio");
-            x.play();
-        });
+        setInterval(change, 400);
+        function change() {
+            const msg = document.querySelector("h1");
+                
+            if(msg.style.color === "" || msg.style.color === "black") {
+                msg.style.color = "white";
+                document.body.style.backgroundColor = "black";
+            } else if(msg.style.color === "white") {
+                msg.style.color = "black";
+                document.body.style.backgroundColor = "white";
+            }
+        }
     </script>
     </body>
 </html>
