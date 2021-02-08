@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Mobile Navbar</title>
         <style>
+            body {
+                font-family:Arial, Helvetica, sans-serif;
+            }
             .navbar-nav {
                 display: none;
             }
@@ -25,7 +28,7 @@
                 border-radius: 15px;
                 padding: 10px;
             }
-            @media only screen and (max-width: 820px) and (max-height: 820px) {
+            @media only screen and (max-width: 830px) and (max-height: 830px) {
                 .large {
                     display: none;
                 }
@@ -169,7 +172,7 @@
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam non quasi dolorum ducimus facere culpa, obcaecati autem saepe quidem! Consequuntur, enim eius repudiandae quis odit velit ipsa neque. Dolore, esse.
         </div>
         <div class="large">
-            <h1>Can only be viewed on smaller screens</h1>
+            <h1>Can only be viewed on phone screens</h1>
         </div>
     <script>
         document.addEventListener("DOMContentLoaded", function(){
@@ -184,11 +187,13 @@
                         links.className += " opened"
                         hamburger.style.backgroundColor = "red";
                         content.style.zIndex = "-1";
+                        document.body.style.overflow = "hidden";
                     } else {
                         line[i].classList.remove("toggle");
                         links.classList.remove("opened");
                         hamburger.style.backgroundColor = "black";
                         content.style.zIndex = "1";
+                        document.body.style.overflow = "scroll";
                     }
                 }
             });
