@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0px;
+        }
+
+        .page {
+            padding: 1px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .first {
+            
+            background-color: rgb(243, 118, 118);
+        }
+
+        .second {
+            background-color: yellow;
+        }
+
+        .third {
+            background-color: rgb(15, 235, 15);
+        }
+        .hide {
+            display: none;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="first page">
+        <h1>First</h1>
+    </div>
+    <div class="second page">
+        <h1>Second</h1>
+    </div>
+    <div class="third page">
+        <h1>Third</h1>
+    </div>
+    <script>
+        const page = document.querySelectorAll(".page");
+        const first = document.querySelector(".first");
+        const second = document.querySelector(".second");
+        const third = document.querySelector(".third");
+
+        window.addEventListener("DOMContentLoaded", function () {
+            changeSize();
+        })
+        window.addEventListener("resize", changeSize);
+
+        function changeSize(){
+            for(let i = 0; i<page.length; i++) {
+                page[i].style.width = window.innerWidth+"px";
+                page[i].style.height = window.innerHeight+"px";
+            }
+        }
+        window.addEventListener("scroll", function () {
+            // alert(window.pageYOffset);
+            if(window.pageYOffset > 0) {
+                if(!first.classList.contains("hide")) {
+                    first.className += " hide";
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
