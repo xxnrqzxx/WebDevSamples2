@@ -9,29 +9,35 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             margin: 0px;
+            overflow-x: hidden;
         }
 
         .page {
+            opacity: 1;
             padding: 1px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
         }
 
         .first {
-            
+            transition: all 0.5s ease;
             background-color: rgb(243, 118, 118);
         }
 
         .second {
             background-color: yellow;
+            transition: all 0.5s ease;
         }
 
         .third {
+            transition: all 0.5s ease;
             background-color: rgb(15, 235, 15);
         }
         .hide {
-            display: none;
-            transition: all 0.3s ease;
+            /* position: fixed; */
+            margin-top: -944px;
+            opacity: 0;
+            transition: all 0.5s ease;
         }
     </style>
 </head>
@@ -46,31 +52,61 @@
     <div class="third page">
         <h1>Third</h1>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         const page = document.querySelectorAll(".page");
+
         const first = document.querySelector(".first");
         const second = document.querySelector(".second");
         const third = document.querySelector(".third");
 
-        window.addEventListener("DOMContentLoaded", function () {
-            changeSize();
-        })
-        window.addEventListener("resize", changeSize);
+        // window.addEventListener("DOMContentLoaded", function () {
+        //     changeSize();
+        // })
+        // window.addEventListener("resize", changeSize);
 
-        function changeSize(){
-            for(let i = 0; i<page.length; i++) {
-                page[i].style.width = window.innerWidth+"px";
-                page[i].style.height = window.innerHeight+"px";
+        // function changeSize(){
+        //     for(let i = 0; i<page.length; i++) {
+        //         page[i].style.width = window.innerWidth+"px";
+        //         page[i].style.height = window.innerHeight+"px";
+        //     }
+        // }
+        // window.addEventListener("scroll", function () {
+        //     alert(window.pageYOffset);
+        //     if(window.pageYOffset > 0) {
+        //         if(!first.classList.contains("hide")) {
+        //             first.className += " hide";
+        //         }
+        //     }
+        // })
+        $(window).resize(resizeElement);
+        $(window).ready(function() {
+            resizeElement();
+        });
+        $(window).scroll(function(){
+            var winHeight = $(window).height();
+            var docHeight = $(document).height();
+            var scrollTop = $(window).scrollTop();
+            var trackLength = docHeight - winHeight;
+            var pctScrolled = Math.floor(scrollTop/trackLength * 100);
+            console.log(pctScrolled + '% scrolled');
+            console.log(scrollTop);
+            console.log("document height: "+$(document).height());
+            console.log("window height: "+$(window).height());
+            console.log("window height: "+window.innerHeight);
+            if(pctScrolled > 15) {
+                first.classList.add("hide");
+            } else if(pctScrolled < 50) {
+                first.classList.remove("hide");
             }
+        });
+
+        function resizeElement() {
+            page.forEach(function (element) {
+                element.style.width = window.innerWidth+"px";
+                element.style.height = window.innerHeight+"px";
+            });
         }
-        window.addEventListener("scroll", function () {
-            // alert(window.pageYOffset);
-            if(window.pageYOffset > 0) {
-                if(!first.classList.contains("hide")) {
-                    first.className += " hide";
-                }
-            }
-        })
     </script>
 </body>
 
