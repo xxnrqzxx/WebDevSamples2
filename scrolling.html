@@ -33,9 +33,22 @@
             transition: all 0.5s ease;
             background-color: rgb(15, 235, 15);
         }
+
+        .down {
+            position: relative;
+            left: 50%;
+            top: 50%;
+            font-size: 30px;
+            transform: translate(-50%, -50%);
+            border: 2px solid black;
+            padding: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 35px;
+            text-align: center;
+        }
+
         .hide {
-            /* position: fixed; */
-            margin-top: -944px;
             opacity: 0;
             transition: all 0.5s ease;
         }
@@ -45,9 +58,11 @@
 <body>
     <div class="first page">
         <h1>First</h1>
+        <div class="down" href=".second">V</div>
     </div>
     <div class="second page">
         <h1>Second</h1>
+        <div class="down" href=".third">V</div>
     </div>
     <div class="third page">
         <h1>Third</h1>
@@ -80,31 +95,38 @@
         //     }
         // })
         $(window).resize(resizeElement);
-        $(window).ready(function() {
+        $(window).ready(function () {
             resizeElement();
+            $(document).ready(function () {
+                $(".down").click(function (event) {
+                    event.preventDefault();
+                    $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 300);
+                   $(this).parent().addClass("hide");
+                });
+            });
         });
-        $(window).scroll(function(){
+        $(window).scroll(function () {
             var winHeight = $(window).height();
             var docHeight = $(document).height();
             var scrollTop = $(window).scrollTop();
             var trackLength = docHeight - winHeight;
-            var pctScrolled = Math.floor(scrollTop/trackLength * 100);
+            var pctScrolled = Math.floor(scrollTop / trackLength * 100);
             console.log(pctScrolled + '% scrolled');
             console.log(scrollTop);
-            console.log("document height: "+$(document).height());
-            console.log("window height: "+$(window).height());
-            console.log("window height: "+window.innerHeight);
-            if(pctScrolled > 15) {
-                first.classList.add("hide");
-            } else if(pctScrolled < 50) {
-                first.classList.remove("hide");
+            console.log("document height: " + $(document).height());
+            console.log("window height: " + $(window).height());
+            console.log("window height: " + window.innerHeight);
+            if (pctScrolled > 0) {
+
+            } else if (pctScrolled < 50) {
+
             }
         });
 
         function resizeElement() {
             page.forEach(function (element) {
-                element.style.width = window.innerWidth+"px";
-                element.style.height = window.innerHeight+"px";
+                element.style.width = window.innerWidth + "px";
+                element.style.height = window.innerHeight + "px";
             });
         }
     </script>
