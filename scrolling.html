@@ -34,12 +34,21 @@
             background-color: rgb(15, 235, 15);
         }
 
-        .down {
+        .controls {
+            align-items: center;
+            justify-content: center;
+            display: flex;
             position: relative;
+            width: 250px;
+            height: 250px;
             left: 50%;
             top: 50%;
-            font-size: 30px;
             transform: translate(-50%, -50%);
+        }
+
+        .nav {
+            margin: 10px;
+            font-size: 30px;
             border: 2px solid black;
             padding: 10px;
             width: 50px;
@@ -58,14 +67,22 @@
 <body>
     <div class="first page">
         <h1>First</h1>
-        <div class="down" href=".second">V</div>
+        <div class="controls">
+            <div class="down nav" href=".second">V</div>
+        </div>
     </div>
     <div class="second page">
         <h1>Second</h1>
-        <div class="down" href=".third">V</div>
+        <div class="controls">
+            <div class="down nav" href=".third">V</div>
+            <div class="up nav" href=".first">A</div>
+        </div>
     </div>
     <div class="third page">
         <h1>Third</h1>
+        <div class="controls">
+            <div class="up nav" href=".second">A</div>
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -100,11 +117,17 @@
             $(document).ready(function () {
                 $(".down").click(function (event) {
                     event.preventDefault();
-                    $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 300);
-                   $(this).parent().addClass("hide");
+                    navPages($(this));
+                   $(this).parent().parent().addClass("hide");
+                });
+                $(".up").click(function (event) {
+                    event.preventDefault();
+                    navPages($(this));
+                    $($(this).attr("href")).removeClass("hide");
                 });
             });
         });
+        
         $(window).scroll(function () {
             var winHeight = $(window).height();
             var docHeight = $(document).height();
@@ -122,6 +145,10 @@
 
             }
         });
+
+        function navPages(e) {
+            $("html, body").animate({ scrollTop: $(e.attr("href")).offset().top }, 300);
+        }
 
         function resizeElement() {
             page.forEach(function (element) {
