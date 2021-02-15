@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scroll Direction</title>
+        <style>
+            body {
+                margin: 0px;
+            }
+            .page {
+                position: relative;
+                height: 944px;
+            }
+            .one {
+                background-color: red;
+            }
+            .two {
+                background-color: blue;
+            }
+            .three {
+                background-color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="one page active" data-up=".one" data-down=".two"></div>
+        <div class="two page" data-up=".one" data-down=".three"></div>
+        <div class="three page" data-up=".two" data-down=".three"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        const page = document.querySelectorAll(".page");
+         $(function(){
+            var lastScrollTop = 0, delta = 5;
+            $(window).scroll(function(){
+                var nowScrollTop = $(this).scrollTop();
+                if(Math.abs(lastScrollTop - nowScrollTop) >= delta){
+                    if (nowScrollTop > lastScrollTop){
+                        page.forEach(function(element) {
+                            if(element.classList.contains("active")){
+                                $("html, body").animate({ scrollTop: $($(element).attr("data-down")).offset().top }, 500);
+                                $(element).removeClass("active");
+                                $($(element).attr("data-down")).addClass("active");
+                                setTimeout(function() {
+                                   
+                                }, 900)
+                            }
+                        })
+                    } else {
+                    }
+                lastScrollTop = nowScrollTop;
+                }
+            });
+        });
+    </script>
+    </body>
+</html>
