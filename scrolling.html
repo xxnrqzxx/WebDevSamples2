@@ -9,7 +9,7 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             margin: 0px;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         .page {
@@ -34,27 +34,13 @@
             background-color: rgb(15, 235, 15);
         }
 
-        .controls {
-            align-items: center;
-            justify-content: center;
-            display: flex;
+        .page > h1 {
             position: relative;
             width: 250px;
             height: 250px;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-        }
-
-        .nav {
-            margin: 10px;
-            font-size: 30px;
-            border: 2px solid black;
-            padding: 10px;
-            width: 50px;
-            height: 50px;
-            border-radius: 35px;
-            text-align: center;
         }
 
         .hide {
@@ -65,89 +51,42 @@
 </head>
 
 <body>
-    <div class="first page">
+    <div class="first page active" data-up=".first" data-down=".second">
         <h1>First</h1>
-        <div class="controls">
-            <div class="down nav" href=".second">V</div>
-        </div>
     </div>
-    <div class="second page">
+    <div class="second page" data-up=".first" data-down=".third">
         <h1>Second</h1>
-        <div class="controls">
-            <div class="down nav" href=".third">V</div>
-            <div class="up nav" href=".first">A</div>
-        </div>
     </div>
-    <div class="third page">
+    <div class="third page" data-up=".second" data-down=".third">
         <h1>Third</h1>
-        <div class="controls">
-            <div class="up nav" href=".second">A</div>
-        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         const page = document.querySelectorAll(".page");
 
-        const first = document.querySelector(".first");
-        const second = document.querySelector(".second");
-        const third = document.querySelector(".third");
-
-        // window.addEventListener("DOMContentLoaded", function () {
-        //     changeSize();
-        // })
-        // window.addEventListener("resize", changeSize);
-
-        // function changeSize(){
-        //     for(let i = 0; i<page.length; i++) {
-        //         page[i].style.width = window.innerWidth+"px";
-        //         page[i].style.height = window.innerHeight+"px";
-        //     }
-        // }
-        // window.addEventListener("scroll", function () {
-        //     alert(window.pageYOffset);
-        //     if(window.pageYOffset > 0) {
-        //         if(!first.classList.contains("hide")) {
-        //             first.className += " hide";
-        //         }
-        //     }
-        // })
         $(window).resize(resizeElement);
         $(window).ready(function () {
             resizeElement();
-            $(document).ready(function () {
-                $(".down").click(function (event) {
-                    event.preventDefault();
-                    navPages($(this));
-                   $(this).parent().parent().addClass("hide");
-                });
-                $(".up").click(function (event) {
-                    event.preventDefault();
-                    navPages($(this));
-                    $($(this).attr("href")).removeClass("hide");
-                });
-            });
-        });
-        
-        $(window).scroll(function () {
-            var winHeight = $(window).height();
-            var docHeight = $(document).height();
-            var scrollTop = $(window).scrollTop();
-            var trackLength = docHeight - winHeight;
-            var pctScrolled = Math.floor(scrollTop / trackLength * 100);
-            console.log(pctScrolled + '% scrolled');
-            console.log(scrollTop);
-            console.log("document height: " + $(document).height());
-            console.log("window height: " + $(window).height());
-            console.log("window height: " + window.innerHeight);
-            if (pctScrolled > 0) {
-
-            } else if (pctScrolled < 50) {
-
-            }
         });
 
-        function navPages(e) {
-            $("html, body").animate({ scrollTop: $(e.attr("href")).offset().top }, 300);
+        window.addEventListener("wheel", function(event) {
+           page.forEach(function(element) {
+               if(element.classList.contains("active")) {
+                    if(event.deltaY < 0) {
+                        navPages(element, $(element).attr("data-up"));
+                    } else {
+                        navPages(element, $(element).attr("data-down"));
+                    }
+               }
+           })
+        })
+
+        function navPages(e, el) {
+            $("html, body").animate({ scrollTop: $(el).offset().top }, 300);
+            e.classList.remove("active");
+            setTimeout(function() {
+                $(el).addClass("active");
+            }, 400)
         }
 
         function resizeElement() {
