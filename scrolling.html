@@ -13,24 +13,22 @@
         }
 
         .page {
+            position: relative;
             opacity: 1;
             padding: 1px;
             text-align: center;
-            transition: all 0.5s ease;
+            transition: all 1s ease;
         }
 
         .first {
-            transition: all 0.5s ease;
             background-color: rgb(243, 118, 118);
         }
 
         .second {
             background-color: yellow;
-            transition: all 0.5s ease;
         }
 
         .third {
-            transition: all 0.5s ease;
             background-color: rgb(15, 235, 15);
         }
 
@@ -45,24 +43,46 @@
 
         .hide {
             opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .pageno {
+            opacity: 0;
+            position: fixed;
+            z-index: 5;
+            font-size: 30px;
+            left: 50%;
+            top: 90%;
+            transform: translate(-50%, -50%);
             transition: all 0.5s ease;
+            color: white;
+            border: 1px solid black;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 25px;
         }
     </style>
 </head>
 
 <body>
-    <div class="first page active" data-up=".first" data-down=".second">
+    <div class="first page active" data-up=".first" data-down=".second" data-pageno="1">
         <h1>First</h1>
     </div>
-    <div class="second page" data-up=".first" data-down=".third">
+    <div class="second page" data-up=".first" data-down=".third" data-pageno="2">
         <h1>Second</h1>
     </div>
-    <div class="third page" data-up=".second" data-down=".third">
+    <div class="third page" data-up=".second" data-down=".third" data-pageno="3">
         <h1>Third</h1>
     </div>
+    <div class="pageno"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         const page = document.querySelectorAll(".page");
+        const pageno = document.querySelector(".pageno");
+        var t = setTimeout(function() {
+                pageno.style.opacity = "0";
+            }, 3000);
+;
 
         $(window).resize(resizeElement);
         $(window).ready(function () {
@@ -82,11 +102,24 @@
         })
 
         function navPages(e, el) {
-            $("html, body").animate({ scrollTop: $(el).offset().top }, 300);
+            $("html, body").animate({ scrollTop: $(el).offset().top }, 500);
             e.classList.remove("active");
+            e.classList.add("hide");
+            $(el).removeClass("hide");
+
             setTimeout(function() {
                 $(el).addClass("active");
-            }, 400)
+            }, 300);
+
+            pageno.style.opacity = "1";
+
+            clearTimeout(t);
+
+            t = setTimeout(function() {
+                pageno.style.opacity = "0";
+            }, 3000);
+
+            pageno.innerHTML = $(el).attr("data-pageno")+" / "+page.length;
         }
 
         function resizeElement() {
