@@ -16,8 +16,8 @@
             position: relative;
             opacity: 1;
             padding: 1px;
-            text-align: center;
             transition: all 1s ease;
+            /* font-size: 50px; */
         }
 
         .first {
@@ -33,12 +33,15 @@
         }
 
         .page > h1 {
+            font-size: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
-            width: 250px;
-            height: 250px;
             left: 50%;
             top: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -107%);
+            /* border: 1px solid black; */
         }
 
         .hide {
@@ -56,11 +59,77 @@
             transform: translate(-50%, -50%);
             transition: all 0.5s ease;
             color: white;
-            border: 1px solid black;
+            /* border: 1px solid black; */
             padding: 10px;
             background-color: rgba(0,0,0,0.5);
             border-radius: 25px;
         }
+
+        .sidenav {
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            position: fixed;
+            /* border: 1px solid black; */
+            left: 90%;
+            top: 0%;
+            width: 10%;
+            height: 100%;
+        }
+
+        .indicator {
+            /* opacity: 0; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            left: 103%;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            padding: 10px;
+            border-radius: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            opacity: 0.5;
+            margin: 5px;
+            border-radius: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .dot.hover {g
+            width: 40px;
+            height: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.show {
+            left: 95%;
+            width: 20px;
+            height: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.show:hover{
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 150px;
+        }
+
+        .dot.hover:hover {
+            opacity: 1;
+        }
+
     </style>
 </head>
 
@@ -75,18 +144,53 @@
         <h1>Third</h1>
     </div>
     <div class="pageno"></div>
+    <div class="sidenav">
+        <div class="indicator">
+            <div class="one dot"></div>
+            <div class="two dot"></div>
+            <div class="three dot"></div>
+        </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         const page = document.querySelectorAll(".page");
         const pageno = document.querySelector(".pageno");
+
         var t = setTimeout(function() {
                 pageno.style.opacity = "0";
             }, 3000);
-;
+
+        var u = setTimeout(function() {
+            $(".indicator").removeClass("show");
+            }, 3000);
+
+        // var v = setTimeout(function() {
+        //     $(".dot").removeClass("hover");
+        // }, 3000);
+
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);  
+        }
 
         $(window).resize(resizeElement);
+
         $(window).ready(function () {
             resizeElement();
+            $(".sidenav").hover(function(){
+                $(".indicator").addClass("show");
+
+                clearTimeout(u);
+
+                u = setTimeout(function() {
+                    $(".indicator").removeClass("show");
+                }, 3000);
+            });
+
+            $(".indicator").hover(function() {
+                $(".dot").addClass("hover");
+            }, function() {
+                $(".dot").removeClass("hover");
+            });
         });
 
         window.addEventListener("wheel", function(event) {
