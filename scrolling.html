@@ -106,7 +106,7 @@
             transition: all 0.3s ease;
         }
 
-        .dot.hover {g
+        .dot.hover {
             width: 40px;
             height: 40px;
             transition: all 0.3s ease;
@@ -126,7 +126,7 @@
             height: 150px;
         }
 
-        .dot.hover:hover {
+        .dot.hover:hover, .dot.active {
             opacity: 1;
         }
 
@@ -146,15 +146,13 @@
     <div class="pageno"></div>
     <div class="sidenav">
         <div class="indicator">
-            <div class="one dot"></div>
-            <div class="two dot"></div>
-            <div class="three dot"></div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         const page = document.querySelectorAll(".page");
         const pageno = document.querySelector(".pageno");
+        const indicator = document.querySelector(".indicator");
 
         var t = setTimeout(function() {
                 pageno.style.opacity = "0";
@@ -176,6 +174,14 @@
 
         $(window).ready(function () {
             resizeElement();
+
+            for(let i = 0; i<page.length; i++) {
+                indicator.innerHTML += "<div class='dot "+$(page[i]).attr("data-pageno")+"'></div>";
+
+                if(page[i].classList.contains("active")){
+                    $("."+$(page[i]).attr("data-pageno")).addClass("active");
+                }
+            }
             $(".sidenav").hover(function(){
                 $(".indicator").addClass("show");
 
@@ -202,8 +208,26 @@
                         navPages(element, $(element).attr("data-down"));
                     }
                }
-           })
-        })
+           });
+        });
+
+        window.addEventListener("scroll", function() {
+            for(let i = 0; i<page.length; i++) {
+                $("."+$(page[i]).attr("data-pageno")).removeClass("active");
+                if(page[i].classList.contains("active")){
+                    $("."+$(page[i]).attr("data-pageno")).addClass("active");
+                }
+            }
+
+            $(".indicator").addClass("show");
+
+            clearTimeout(u);
+
+            u = setTimeout(function() {
+                $(".indicator").removeClass("show");
+            }, 3000);
+
+        });
 
         function navPages(e, el) {
             $("html, body").animate({ scrollTop: $(el).offset().top }, 500);
