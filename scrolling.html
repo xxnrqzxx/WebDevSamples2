@@ -153,6 +153,7 @@
         const page = document.querySelectorAll(".page");
         const pageno = document.querySelector(".pageno");
         const indicator = document.querySelector(".indicator");
+        const dot = document.querySelectorAll(".dot");
 
         var t = setTimeout(function() {
                 pageno.style.opacity = "0";
@@ -217,6 +218,7 @@
                 if(page[i].classList.contains("active")){
                     $("."+$(page[i]).attr("data-pageno")).addClass("active");
                 }
+                
             }
 
             $(".indicator").addClass("show");
@@ -228,6 +230,8 @@
             }, 3000);
 
         });
+
+        
 
         function navPages(e, el) {
             $("html, body").animate({ scrollTop: $(el).offset().top }, 500);
