@@ -57,7 +57,7 @@
             left: 50%;
             top: 90%;
             transform: translate(-50%, -50%);
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
             color: white;
             /* border: 1px solid black; */
             padding: 10px;
@@ -198,6 +198,8 @@
             }, function() {
                 $(".dot").removeClass("hover");
             });
+
+
         });
 
         window.addEventListener("wheel", function(event) {
@@ -212,13 +214,29 @@
            });
         });
 
-        window.addEventListener("scroll", function() {
+        window.addEventListener("scroll", function(){
             for(let i = 0; i<page.length; i++) {
-                $("."+$(page[i]).attr("data-pageno")).removeClass("active");
-                if(page[i].classList.contains("active")){
-                    $("."+$(page[i]).attr("data-pageno")).addClass("active");
-                }
-                
+                var e = "."+$(page[i]).attr("data-pageno");
+                var f = page[i];
+                sideNav(e, f);
+            }
+            
+        });
+
+        document.addEventListener("click", function(event){
+            const element = event.target;
+            
+            if(element.classList.contains("dot") && !element.classList.contains("active")) {
+               
+            }
+        });
+
+        
+
+        function sideNav(e, f){
+            $(e).removeClass("active");
+            if(f.classList.contains("active")){
+                $(e).addClass("active");
             }
 
             $(".indicator").addClass("show");
@@ -228,10 +246,7 @@
             u = setTimeout(function() {
                 $(".indicator").removeClass("show");
             }, 3000);
-
-        });
-
-        
+        }
 
         function navPages(e, el) {
             $("html, body").animate({ scrollTop: $(el).offset().top }, 500);
