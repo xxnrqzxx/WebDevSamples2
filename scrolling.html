@@ -75,6 +75,7 @@
             top: 0%;
             width: 10%;
             height: 100%;
+            transition: all 0.3s ease;
         }
 
         .indicator {
@@ -99,8 +100,7 @@
         .dot {
             width: 20px;
             height: 20px;
-            background-color: white;
-            opacity: 0.5;
+            background-color: rgba(255, 255, 255, 0.5);
             margin: 5px;
             border-radius: 200px;
             transition: all 0.3s ease;
@@ -126,8 +126,12 @@
             height: 150px;
         }
 
-        .dot.hover:hover, .dot.active {
-            opacity: 1;
+        .dot.hover:hover {
+            background-color:rgba(190, 190, 190, 0.5);
+        }
+
+        .dot.active {
+            background-color: rgba(255, 255, 255, 1);
         }
 
     </style>
@@ -227,7 +231,14 @@
             const element = event.target;
             
             if(element.classList.contains("dot") && !element.classList.contains("active")) {
-               
+               page.forEach(function(pageEl){
+                   pageEl.classList.remove("active");
+                   pageEl.classList.remove("hide");
+                if(element.classList.contains(""+$(pageEl).attr("data-pageno")+"")){
+                    var a = "."+pageEl.classList[0];
+                    navPages(pageEl, a);
+                }
+               });
             }
         });
 
