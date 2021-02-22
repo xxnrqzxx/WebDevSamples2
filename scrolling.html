@@ -237,14 +237,13 @@
             const element = event.target;
             
             if(element.classList.contains("dot") && !element.classList.contains("active")) {
-               page.forEach(function(pageEl){
-                   pageEl.classList.remove("active");
-                   pageEl.classList.remove("hide");
-                if(element.classList.contains(""+$(pageEl).attr("data-pageno")+"")){
-                    var a = "."+pageEl.classList[0];
-                    navPages(pageEl, a);
-                }
-               });
+                
+                page.forEach(function(pageEl){
+                    pageEl.classList.remove("active");
+                    if(element.classList.contains(""+$(pageEl).attr("data-pageno")+"")){
+                        
+                    }
+                });
             }
         });
 
