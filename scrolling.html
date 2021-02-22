@@ -13,7 +13,7 @@
         }
 
         .page {
-            position: relative;
+            position: absolute;
             opacity: 1;
             padding: 1px;
             transition: all 1s ease;
@@ -22,14 +22,17 @@
 
         .first {
             background-color: rgb(243, 118, 118);
+            z-index: 3;
         }
 
         .second {
             background-color: yellow;
+            z-index: 2;
         }
 
         .third {
             background-color: rgb(15, 235, 15);
+            z-index: 1;
         }
 
         .page > h1 {
@@ -66,6 +69,7 @@
         }
 
         .sidenav {
+            z-index: 5;
             display: flex;
             align-items: center;
             justify-items: center;
@@ -79,6 +83,7 @@
         }
 
         .indicator {
+            z-index: 5;
             /* opacity: 0; */
             display: flex;
             flex-direction: column;
@@ -207,8 +212,8 @@
         });
 
         window.addEventListener("wheel", function(event) {
-           page.forEach(function(element) {
-               if(element.classList.contains("active")) {
+            page.forEach(function(element) {
+                if(element.classList.contains("active")) {
                     if(event.deltaY < 0) {
                         navPages(element, $(element).attr("data-up"));
                     } else {
@@ -216,16 +221,17 @@
                     }
                }
            });
+           sideNav();
         });
 
-        window.addEventListener("scroll", function(){
-            for(let i = 0; i<page.length; i++) {
-                var e = "."+$(page[i]).attr("data-pageno");
-                var f = page[i];
-                sideNav(e, f);
-            }
+        // window.addEventListener("scroll", function(){
+        //     for(let i = 0; i<page.length; i++) {
+        //         var e = "."+$(page[i]).attr("data-pageno");
+        //         var f = page[i];
+        //         sideNav(e, f);
+        //     }
             
-        });
+        // });
 
         document.addEventListener("click", function(event){
             const element = event.target;
@@ -244,29 +250,19 @@
 
         
 
-        function sideNav(e, f){
-            $(e).removeClass("active");
-            if(f.classList.contains("active")){
-                $(e).addClass("active");
-            }
-
-            $(".indicator").addClass("show");
-
-            clearTimeout(u);
-
-            u = setTimeout(function() {
-                $(".indicator").removeClass("show");
-            }, 3000);
-        }
+        
 
         function navPages(e, el) {
-            $("html, body").animate({ scrollTop: $(el).offset().top }, 500);
+            // $("html, body").animate({ scrollTop: $(el).offset().top }, 500);
+            // alert("test");
             e.classList.remove("active");
             e.classList.add("hide");
+            $("."+$(e).attr("data-pageno")).removeClass("active");
             $(el).removeClass("hide");
 
             setTimeout(function() {
                 $(el).addClass("active");
+                $("."+$(el).attr("data-pageno")).addClass("active");
             }, 300);
 
             pageno.style.opacity = "1";
@@ -278,6 +274,16 @@
             }, 3000);
 
             pageno.innerHTML = $(el).attr("data-pageno")+" / "+page.length;
+        }
+
+        function sideNav(){
+            $(".indicator").addClass("show");
+
+            clearTimeout(u);
+
+            u = setTimeout(function() {
+                $(".indicator").removeClass("show");
+            }, 3000);
         }
 
         function resizeElement() {
