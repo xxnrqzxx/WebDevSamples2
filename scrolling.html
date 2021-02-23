@@ -208,7 +208,9 @@
                 $(".dot").removeClass("hover");
             });
 
-
+            $(".dot").hover(function() {
+                sideNav();
+            });
         });
 
         window.addEventListener("wheel", function(event) {
@@ -235,15 +237,30 @@
 
         document.addEventListener("click", function(event){
             const element = event.target;
+            const dot = document.querySelectorAll(".dot");
             
             if(element.classList.contains("dot") && !element.classList.contains("active")) {
                 
                 page.forEach(function(pageEl){
                     pageEl.classList.remove("active");
+                    pageEl.classList.add("hide");
+                    dot.forEach(function(dotEl) {
+                        dotEl.classList.remove("active");
+                    });
                     if(element.classList.contains(""+$(pageEl).attr("data-pageno")+"")){
-                        
+                        pageEl.classList.remove("hide");
+                        setTimeout(function() {
+                            pageEl.classList.add("active");
+                            element.classList.add("active");
+                        }, 300);
                     }
                 });
+
+                pageno.innerHTML = element.classList[1]+" / "+page.length;
+
+                
+                pageNo();
+                sideNav();
             }
         });
 
@@ -264,15 +281,9 @@
                 $("."+$(el).attr("data-pageno")).addClass("active");
             }, 300);
 
-            pageno.style.opacity = "1";
-
-            clearTimeout(t);
-
-            t = setTimeout(function() {
-                pageno.style.opacity = "0";
-            }, 3000);
-
             pageno.innerHTML = $(el).attr("data-pageno")+" / "+page.length;
+
+            pageNo();
         }
 
         function sideNav(){
@@ -282,6 +293,16 @@
 
             u = setTimeout(function() {
                 $(".indicator").removeClass("show");
+            }, 3000);
+        }
+
+        function pageNo() {
+            pageno.style.opacity = "1";
+
+            clearTimeout(t);
+
+            t = setTimeout(function() {
+                pageno.style.opacity = "0";
             }, 3000);
         }
 
