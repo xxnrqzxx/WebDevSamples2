@@ -17,22 +17,18 @@
             opacity: 1;
             padding: 1px;
             transition: all 1s ease;
-            /* font-size: 50px; */
         }
 
         .first {
             background-color: rgb(243, 118, 118);
-            z-index: 3;
         }
 
         .second {
             background-color: yellow;
-            z-index: 2;
         }
 
         .third {
             background-color: rgb(15, 235, 15);
-            z-index: 1;
         }
 
         .page > h1 {
@@ -44,7 +40,6 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -107%);
-            /* border: 1px solid black; */
         }
 
         .hide {
@@ -62,7 +57,6 @@
             transform: translate(-50%, -50%);
             transition: all 0.3s ease;
             color: white;
-            /* border: 1px solid black; */
             padding: 10px;
             background-color: rgba(0,0,0,0.5);
             border-radius: 25px;
@@ -74,7 +68,6 @@
             align-items: center;
             justify-items: center;
             position: fixed;
-            /* border: 1px solid black; */
             left: 90%;
             top: 0%;
             width: 10%;
@@ -84,7 +77,6 @@
 
         .indicator {
             z-index: 5;
-            /* opacity: 0; */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -172,14 +164,6 @@
             $(".indicator").removeClass("show");
             }, 3000);
 
-        // var v = setTimeout(function() {
-        //     $(".dot").removeClass("hover");
-        // }, 3000);
-
-        window.onbeforeunload = function () {
-            window.scrollTo(0, 0);  
-        }
-
         $(window).resize(resizeElement);
 
         $(window).ready(function () {
@@ -191,16 +175,10 @@
                 if(page[i].classList.contains("active")){
                     $("."+$(page[i]).attr("data-pageno")).addClass("active");
                 }
+
+                page[i].style.zIndex = page.length - i;
             }
-            $(".sidenav").hover(function(){
-                $(".indicator").addClass("show");
-
-                clearTimeout(u);
-
-                u = setTimeout(function() {
-                    $(".indicator").removeClass("show");
-                }, 3000);
-            });
+            $(".sidenav").hover(sideNav);
 
             $(".indicator").hover(function() {
                 $(".dot").addClass("hover");
@@ -226,15 +204,6 @@
            sideNav();
         });
 
-        // window.addEventListener("scroll", function(){
-        //     for(let i = 0; i<page.length; i++) {
-        //         var e = "."+$(page[i]).attr("data-pageno");
-        //         var f = page[i];
-        //         sideNav(e, f);
-        //     }
-            
-        // });
-
         document.addEventListener("click", function(event){
             const element = event.target;
             const dot = document.querySelectorAll(".dot");
@@ -258,19 +227,12 @@
 
                 pageno.innerHTML = element.classList[1]+" / "+page.length;
 
-                
                 pageNo();
                 sideNav();
             }
         });
 
-        
-
-        
-
         function navPages(e, el) {
-            // $("html, body").animate({ scrollTop: $(el).offset().top }, 500);
-            // alert("test");
             e.classList.remove("active");
             e.classList.add("hide");
             $("."+$(e).attr("data-pageno")).removeClass("active");
