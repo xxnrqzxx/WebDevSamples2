@@ -203,19 +203,33 @@
                 $(".dot").removeClass("hover");
             });
 
+            $(".dot").hover(function() {
+                sideNav();
+            });
 
         });
 
         window.addEventListener("wheel", function(event) {
+
+            const dot = document.querySelectorAll(".dot");
+
            page.forEach(function(element) {
+            
                if(element.classList.contains("active")) {
+
+                dot.forEach(function (dotEl) {
+                    dotEl.classList.remove("active");
+                });
                     if(event.deltaY < 0) {
+                        $("."+$($(element).attr("data-up")).attr("data-pageno")).addClass("active");
                         navPages(element, $(element).attr("data-up"));
                     } else {
+                        $("."+$($(element).attr("data-down")).attr("data-pageno")).addClass("active");
                         navPages(element, $(element).attr("data-down"));
                     }
                }
            });
+           sideNav();
         });
 
         // window.addEventListener("scroll", function(){
@@ -233,12 +247,12 @@
             
             if(element.classList.contains("dot") && !element.classList.contains("active")) {
                 page.forEach(function(pageEl){
-                //    pageEl.classList.remove("active");
-                //    pageEl.classList.remove("hide");
-                    // dot.forEach(function(dotEl) {
-                    //     dotEl.classList.remove("active");
-                    // });
+                   pageEl.classList.remove("active");
+                   pageEl.classList.add("hide");
                     if(element.classList.contains(""+$(pageEl).attr("data-pageno")+"")){
+                        dot.forEach(function(dotEl) {
+                            dotEl.classList.remove("active");
+                        });
                         element.classList.add("active");
                         var a = "."+pageEl.classList[0];
                         navPages(pageEl, a);
@@ -269,6 +283,9 @@
 
             setTimeout(function() {
                 $(el).addClass("active");
+                page.forEach(function(pageEl) {
+                    pageEl.classList.remove("hide");
+                });
             }, 300);
 
             pageno.style.opacity = "1";
