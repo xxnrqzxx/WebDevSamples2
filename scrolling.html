@@ -143,7 +143,7 @@
 </head>
 
 <body>
-    <div class="first page active" data-up=".first" data-down=".second" data-pageno="1">
+    <div class="first page" data-up=".first" data-down=".second" data-pageno="1">
         <h1>First</h1>
     </div>
     <div class="second page" data-up=".first" data-down=".third" data-pageno="2">
@@ -176,6 +176,8 @@
 
         $(window).ready(function () {
             resizeElement();
+
+            $(".first").addClass("active");
 
             for(let i = 0; i<page.length; i++) {
                 indicator.innerHTML += "<div class='dot "+$(page[i]).attr("data-pageno")+"'></div>";
