@@ -11,6 +11,14 @@ class Content extends React.Component {
     componentDidMount() {
         const page = document.querySelectorAll(".page");
         
+        window.addEventListener("wheel", function(event) {
+            if(event.deltaY < 0 ) {
+                alert("scrolled up");
+            } else {
+                alert("scrolled down");
+            }
+        });
+
         this.pageStyle(page);
     }
 
@@ -19,16 +27,22 @@ class Content extends React.Component {
     }
 
     pageStyle(page) {
+
         for(let i=0; i<page.length; i++) {
+            var elements = document.querySelectorAll("[data-pageno]");
             page[i].style.width = window.innerWidth + "px";
             page[i].style.height = window.innerHeight + "px";
             page[i].style.zIndex = page.length - i;
+            if(elements[i] === $(page[i]).attr("data-pageno")) {
+                alert("test");
+            }
         }
     }
 
     render() {
+        const page = document.querySelectorAll(".page");
         
-        $(window).resize(this.resizeElement);
+        window.addEventListener("resize", this.pageStyle(page));
 
         return(
             <div>
