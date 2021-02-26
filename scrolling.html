@@ -205,9 +205,14 @@
             page.forEach(function(element) {
                 if(element.classList.contains("active")) {
                     if(event.deltaY < 0) {
-                        navPages(element, $(element).attr("data-up"));
+                        if("."+element.classList[0] != $(element).attr("data-up")) {
+                            navPages(element, $(element).attr("data-up"));
+                        }
                     } else {
-                        navPages(element, $(element).attr("data-down"));
+                        if("."+element.classList[0] != $(element).attr("data-down")){
+                            navPages(element, $(element).attr("data-down"));
+                        }
+
                     }
                }
            });
