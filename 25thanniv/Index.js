@@ -18,15 +18,27 @@ class Content extends React.Component {
         page[0].classList.add("active");
 
         window.addEventListener("wheel", event =()=>  {
-            var a;
-            // alert(event.deltaY);
-            if(event.deltaY < 0) {
-                a = -1;
-                this.scrollHandle(a, page);
-            } else {
-                a = 1;
-                this.scrollHandle(a, page);
-            }
+            var a, b;
+            page.forEach(element => {
+                if(element.classList.contains("active")) {
+                    if(event.deltaY < 0) {
+                        a = ($(element).attr("data-pageno"))-1;
+                        if(a <= 0) {
+                            a = 1;
+                        }
+                        b = $("[data-pageno='"+a+"']");
+                        this.scrollHandle(element, b);
+                    } else {
+                        a = Number(($(element).attr("data-pageno")))+1;
+                        if(a >= page.length) {
+                            a = page.length;
+                        }
+                        b = $("[data-pageno='"+a+"']");
+                        this.scrollHandle(element, b);
+                    }
+                }
+            });
+
         });
 
         this.pageStyle();
@@ -49,34 +61,15 @@ class Content extends React.Component {
         }
     }
 
-    scrollHandle(a, page) {
-        var b = this.state.page + a;
-        for(let i = 0; i<page.length; i++) {
-            if(b <= 0) {
-                b = 1;
-            } else if (b >= page.length) {
-                b = page.length;
-            }
-            this.setState(state => ({
-                page: b
-            }));
-            if(page[i].classList.contains("active")) {
+    scrollHandle(e, b) {
+        e.classList.remove("active");
+        e.classList.add("hide");
 
-                page[i].classList.remove("active");
-                page[i].classList.add("hide");
+        $(b).removeClass("hide");
 
-            }
-
-            if($(page[i]).attr("data-pageno") == this.state.page) {
-
-                $(page[i]).removeClass("hide");
-                setTimeout(function() {
-                    $(page[i]).addClass("active");
-                }, 300);
-                
-            }
-        }
-        console.log(this.state.page);
+        setTimeout(function(){
+            $(b).addClass("active");
+        }, 300);
         
     }
 
