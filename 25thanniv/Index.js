@@ -15,7 +15,9 @@ class Content extends React.Component {
 
     componentDidMount() {
         const page = document.querySelectorAll(".page");
+
         page[0].classList.add("active");
+
 
         window.addEventListener("wheel", event =()=>  {
             var a, b;
@@ -53,11 +55,14 @@ class Content extends React.Component {
         const page = document.querySelectorAll(".page");
 
         for(let i=0; i<page.length; i++) {
-            var elements = document.querySelector("[data-pageno='"+$(page[i]).attr("data-pageno")+"']");
+            page[i].style.transition = "none";
             page[i].style.width = window.innerWidth + "px";
             page[i].style.height = window.innerHeight + "px";
             page[i].style.zIndex = page.length - i;
-            console.log(elements.className);
+  
+            setTimeout(function(){
+                page[i].style.transition = "all 1s ease";
+            }, 300);
         }
     }
 
@@ -67,6 +72,10 @@ class Content extends React.Component {
 
         $(b).removeClass("hide");
 
+        this.setState(state => ({
+            page: Number($(b).attr("data-pageno"))
+        }));
+
         setTimeout(function(){
             $(b).addClass("active");
         }, 300);
@@ -74,22 +83,98 @@ class Content extends React.Component {
     }
 
     render() {
-        const page = document.querySelectorAll(".page");
 
+        var page = this.state.page;
+
+        // alert(page);
+    
         $(window).resize(this.pageStyle);
 
         
 
         return(
             <div>
-                <div className="first page" data-up=".first" data-down=".second" data-pageno="1">
-                    <h1>First</h1>
+                <div className="contents">
+                    <div className="first page" data-up=".first" data-down=".second" data-pageno="1">
+                        <h1>First</h1>
+                    </div>
+                    <div className="second page" data-up=".first" data-down=".third" data-pageno="2">
+                        <h1>Second</h1>
+                    </div>
+                    <div className="third page" data-up=".second" data-down=".third" data-pageno="3">
+                        <h1>Third</h1>
+                    </div>
                 </div>
-                <div className="second page" data-up=".first" data-down=".third" data-pageno="2">
-                    <h1>Second</h1>
-                </div>
-                <div className="third page" data-up=".second" data-down=".third" data-pageno="3">
-                    <h1>Third</h1>
+                <Navigation page = {page} />
+            </div>
+        );
+    }
+}
+
+class Navigation extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+    }
+
+    componentDidMount() {
+
+        const pageEl = document.querySelectorAll(".page");
+
+        var u = setTimeout(function() {
+            $(".indicator").removeClass("show");
+            }, 3000);
+
+        var indicator = document.querySelector(".indicator");
+
+        $(document).ready(function() {
+
+            
+            for(let i=0; i<pageEl.length; i++) {
+                indicator.innerHTML += "<div class='dot "+[i+1]+"'></div>";
+                if(pageEl[i].classList.contains("active")){
+                    $("."+$(pageEl[i]).attr("data-pageno")).addClass("active");
+                }
+            }
+
+            $(".sidenav").hover(sideNav);
+
+            $(".indicator").hover(function() {
+                $(".dot").addClass("hover");
+                sideNav();
+            }, function() {
+                $(".dot").removeClass("hover");
+            });
+
+            $(".dot").hover(function() {
+                sideNav();
+            });
+        });
+
+
+        function sideNav() {
+            
+            $(".indicator").addClass("show");
+    
+            clearTimeout(u);
+    
+            u = setTimeout(function() {
+                $(".indicator").removeClass("show");
+                }, 3000);
+        }
+    }
+
+
+
+    render() {
+
+        
+
+        return(
+            <div>
+                <div className="sidenav">
+                    <div className="indicator"></div>
                 </div>
             </div>
         );

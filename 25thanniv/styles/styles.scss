@@ -38,3 +38,73 @@ body {
     opacity: 0;
     transition: all 1s ease;
 }
+
+.sidenav {
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    position: fixed;
+    left: 90%;
+    top: 0%;
+    width: 10%;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.indicator {
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 103%;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 200px;
+    transition: all 0.3s ease;
+}
+
+.dot {
+    z-index: 5;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 5px;
+    border-radius: 200px;
+    transition: all 0.3s ease;
+}
+
+.dot.hover {
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+}
+
+.indicator.show {
+    left: 95%;
+    width: 20px;
+    height: 100px;
+    transition: all 0.3s ease;
+}
+
+.indicator.show:hover{
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 150px;
+}
+
+.dot.active {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.dot.hover:not(.active):hover{
+    background-color: rgba(190, 190, 190, 0.5);
+}
