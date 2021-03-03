@@ -2,11 +2,16 @@ const pageElement = document.querySelectorAll(".page");
 const pages = pageElement.length;
 const sideNav = document.querySelector(".sidenav");
 const indicator = document.querySelector(".indicator");
+const pageNo = document.querySelector(".pageno");
 var dot;
 var indicatorHide = setTimeout(function() {
                         indicator.classList.remove("show");
                     }, 3000);
-var page = 1;
+
+var pageNoHide = setTimeout(function() {
+                    pageNo.style.opacity = 0;
+                }, 3000)
+let page = 1;
 
 
 window.addEventListener("DOMContentLoaded", function() {
@@ -64,6 +69,32 @@ window.addEventListener("DOMContentLoaded", function() {
 
 });
 
+window.addEventListener("click", event=> {
+    const element = event.target;
+    
+    if(element.classList.contains("dot") && !element.classList.contains("active")) {
+        pageElement.forEach(function(pEl) {
+            pEl.classList.remove("active");
+            pEl.classList.add("hide");
+
+            dot.forEach(function(dEl) {
+                dEl.classList.remove("active");
+            })
+
+            if(element.classList.contains(pEl.classList[0])) {
+                pEl.classList.remove("hide");
+                setTimeout(function() {
+                    pEl.classList.add("active");
+                    element.classList.add("active");
+                }, 300);
+
+                page = pEl.dataset.pageno;
+                togglePageNo(page);
+            }
+        });
+    }
+})
+
 function resizePage(pageElement) {
     var winWidth = window.innerWidth+"px";
     var winHeight = window.innerHeight+"px";
@@ -80,6 +111,11 @@ function scrollHandle(pEl, data, page) {
     var nextDot = document.querySelector(".dot."+(nextPage.classList[0])+"");
     var currentDot = document.querySelector(".dot."+(pEl.classList[0])+"");
 
+    if(pEl.className === nextPage.className) {
+        page = nextPage.dataset.pageno;
+        return togglePageNo(page); 
+    }
+
     pEl.classList.remove("active");
     currentDot.classList.remove("active");
 
@@ -93,8 +129,7 @@ function scrollHandle(pEl, data, page) {
         nextDot.classList.add("active");
     }, 300);
 
-    
-
+    togglePageNo(page);    
 }
 
 function toggleSideNav() {
@@ -105,4 +140,16 @@ function toggleSideNav() {
     indicatorHide = setTimeout(function() {
         indicator.classList.remove("show")
     }, 3000)
+}
+
+function togglePageNo(page) {
+    pageNo.innerHTML = page+" / "+pages;
+
+    pageNo.style.opacity = 1;
+
+    clearTimeout(pageNoHide);
+
+    pageNoHide = setTimeout(function () {
+                    pageNo.style.opacity = 0;
+                }, 3000)
 }
