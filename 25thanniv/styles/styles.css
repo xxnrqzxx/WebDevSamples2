@@ -141,4 +141,21 @@ body {
 .dot.hover:not(.active):hover {
   background-color: rgba(190, 190, 190, 0.5);
 }
+
+.pageno {
+  opacity: 1;
+  position: fixed;
+  z-index: 5;
+  font-size: 30px;
+  left: 50%;
+  top: 90%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  color: white;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 25px;
+}
 /*# sourceMappingURL=styles.css.map */

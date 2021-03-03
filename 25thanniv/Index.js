@@ -5,7 +5,8 @@ class Content extends React.Component {
         super(props);
 
         this.state = {
-            page: 1
+            page: 1,
+            pages: 0
         };        
 
         this.pageStyle = this.pageStyle.bind(this);
@@ -16,7 +17,15 @@ class Content extends React.Component {
     componentDidMount() {
         const page = document.querySelectorAll(".page");
 
+
         page[0].classList.add("active");
+
+        $(document).ready(()=> {
+            this.setState(state => ({
+                pages: page.length
+            }));
+        });
+
 
 
         window.addEventListener("wheel", event =()=>  {
@@ -76,6 +85,8 @@ class Content extends React.Component {
             page: Number($(b).attr("data-pageno"))
         }));
 
+        // alert(this.state.page);
+
         setTimeout(function(){
             $(b).addClass("active");
         }, 300);
@@ -85,6 +96,7 @@ class Content extends React.Component {
     render() {
 
         var page = this.state.page;
+        var pages = this.state.pages;
 
         // alert(page);
     
@@ -105,7 +117,7 @@ class Content extends React.Component {
                         <h1>Third</h1>
                     </div>
                 </div>
-                <Navigation page = {page} />
+                <Navigation page = {page} pages = {pages} />
             </div>
         );
     }
@@ -121,7 +133,7 @@ class Navigation extends React.Component {
     componentDidMount() {
 
         const pageEl = document.querySelectorAll(".page");
-
+        
         var u = setTimeout(function() {
             $(".indicator").removeClass("show");
             }, 3000);
@@ -150,6 +162,35 @@ class Navigation extends React.Component {
             $(".dot").hover(function() {
                 sideNav();
             });
+
+           $(document).click(function(event) {
+                const element = event.target;
+
+                const dotEl = document.querySelectorAll(".dot");
+
+
+                if(element.classList.contains("dot") && !element.classList.contains("active")) {
+                    
+                    pageEl.forEach(function(el) {
+                        el.classList.add("hide");
+
+                        dotEl.forEach(function(dEl) {
+                            dEl.classList.remove("active");
+                        });
+                        if(element.classList.contains($(el).attr("data-pageno"))) {
+                            el.classList.remove("hide");
+                            
+
+                            setTimeout(function() {
+                                el.classList.add("active");
+                                element.classList.add("active");
+                            }, 300);
+                        }
+                    });
+                }
+           });
+
+
         });
 
 
@@ -165,17 +206,64 @@ class Navigation extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        const pages = document.querySelectorAll(".page");
+        const dot = document.querySelectorAll(".dot");
+
+        var u = setTimeout(function() {
+            $(".indicator").removeClass("show");
+            }, 3000);
+
+        var a = this.props.page;
+        if(this.props.page !== prevProps.page) {
+            dot.forEach(function(dotEl) {
+                dotEl.classList.remove("active");
+                if(dotEl.classList.contains(a)) {
+                    setTimeout(function() {
+                        dotEl.classList.add("active");
+                    }, 300);
+                }
+            });
+            sideNav();
+        }
+
+        function sideNav() {
+            
+            $(".indicator").addClass("show");
+    
+            clearTimeout(u);
+    
+            u = setTimeout(function() {
+                $(".indicator").removeClass("show");
+                }, 3000);
+        }
+    }
 
 
     render() {
 
-        
+
+        var page = this.props.page;
+        const pages = this.props.pages;
 
         return(
             <div>
                 <div className="sidenav">
                     <div className="indicator"></div>
                 </div>
+            </div>
+        );
+    }
+}
+
+class PageNo extends React.Component {
+
+    render() {
+        const page = this.props.page;
+        const pages = this.props.pages;
+        return(
+            <div>
+                <div className="pageno">{page} / {pages}</div>
             </div>
         );
     }
