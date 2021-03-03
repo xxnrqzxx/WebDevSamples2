@@ -8,6 +8,7 @@ body {
     position: absolute;
     opacity: 1;
     transition: all 1s ease;
+    background-color: white;
 }
 
 .first.page {
@@ -40,7 +41,7 @@ body {
 }
 
 .sidenav {
-    z-index: 5;
+    z-index: 50;
     display: flex;
     align-items: center;
     justify-items: center;
@@ -112,7 +113,7 @@ body {
 .pageno {
     opacity: 0;
     position: fixed;
-    z-index: 5;
+    z-index: 50;
     font-size: 30px;
     left: 50%;
     top: 90%;
