@@ -160,6 +160,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         const page = document.querySelectorAll(".page");
+        const pages = page.length
+        var no;
         const pageno = document.querySelector(".pageno");
         const indicator = document.querySelector(".indicator");
         const dot = document.querySelectorAll(".dot");
@@ -265,7 +267,6 @@
 
         function sideNav(){
 
-            alert("test");
             $(".indicator").addClass("show");
 
             clearTimeout(u);

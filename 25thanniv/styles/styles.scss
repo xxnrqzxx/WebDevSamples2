@@ -10,15 +10,15 @@ body {
     transition: all 1s ease;
 }
 
-.first {
+.first.page {
     background-color: rgb(243, 118, 118);
 }
 
-.second {
+.second.page {
     background-color: yellow;
 }
 
-.third {
+.third.page {
     background-color: rgb(15, 235, 15);
 }
 

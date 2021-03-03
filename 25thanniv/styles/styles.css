@@ -11,15 +11,15 @@ body {
   transition: all 1s ease;
 }
 
-.first {
+.first.page {
   background-color: #f37676;
 }
 
-.second {
+.second.page {
   background-color: yellow;
 }
 
-.third {
+.third.page {
   background-color: #0feb0f;
 }
 

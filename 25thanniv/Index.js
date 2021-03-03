@@ -209,34 +209,34 @@ class Navigation extends React.Component {
     componentDidUpdate(prevProps) {
         const pages = document.querySelectorAll(".page");
         const dot = document.querySelectorAll(".dot");
+        alert(this.props.page);
+        // var u = setTimeout(function() {
+        //     $(".indicator").removeClass("show");
+        //     }, 3000);
 
-        var u = setTimeout(function() {
-            $(".indicator").removeClass("show");
-            }, 3000);
+        // var a = this.props.page;
+        // if(this.props.page !== prevProps.page) {
+        //     dot.forEach(function(dotEl) {
+        //         dotEl.classList.remove("active");
+        //         if(dotEl.classList.contains(a)) {
+        //             setTimeout(function() {
+        //                 dotEl.classList.add("active");
+        //             }, 300);
+        //         }
+        //     });
+        //     sideNav();
+        // }
 
-        var a = this.props.page;
-        if(this.props.page !== prevProps.page) {
-            dot.forEach(function(dotEl) {
-                dotEl.classList.remove("active");
-                if(dotEl.classList.contains(a)) {
-                    setTimeout(function() {
-                        dotEl.classList.add("active");
-                    }, 300);
-                }
-            });
-            sideNav();
-        }
-
-        function sideNav() {
+        // function sideNav() {
             
-            $(".indicator").addClass("show");
+        //     $(".indicator").addClass("show");
     
-            clearTimeout(u);
+        //     clearTimeout(u);
     
-            u = setTimeout(function() {
-                $(".indicator").removeClass("show");
-                }, 3000);
-        }
+        //     u = setTimeout(function() {
+        //         $(".indicator").removeClass("show");
+        //         }, 3000);
+        // }
     }
 
 
