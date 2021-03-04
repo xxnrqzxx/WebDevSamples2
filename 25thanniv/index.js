@@ -16,7 +16,6 @@ let page = 1;
 
 window.addEventListener("DOMContentLoaded", function() {
 
-
     resizePage(pageElement);
 
     pageElement[0].classList.add("active");
@@ -69,6 +68,10 @@ window.addEventListener("DOMContentLoaded", function() {
 
 });
 
+window.addEventListener("resize", function() {
+    resizePage(pageElement);
+});
+
 window.addEventListener("click", event=> {
     const element = event.target;
     
@@ -100,8 +103,13 @@ function resizePage(pageElement) {
     var winHeight = window.innerHeight+"px";
 
     pageElement.forEach(function(pEl) {
+        pEl.style.transition = "none";
         pEl.style.width = winWidth;
         pEl.style.height = winHeight;
+
+        setTimeout(function() {
+            pEl.style.transition = "all 1s ease";
+        }, 300);
     })
 
 }
