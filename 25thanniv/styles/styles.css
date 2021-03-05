@@ -108,6 +108,7 @@ body {
 }
 
 .page > .photo {
+  -webkit-filter: brightness(110%);
   opacity: 0;
   position: absolute;
   height: 800px;
