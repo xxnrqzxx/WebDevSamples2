@@ -9,19 +9,7 @@ body {
   opacity: 1;
   -webkit-transition: all 1s ease;
   transition: all 1s ease;
-  background-color: white;
-}
-
-.first.page {
-  background-color: #f37676;
-}
-
-.second.page {
-  background-color: yellow;
-}
-
-.third.page {
-  background-color: #0feb0f;
+  background-color: #cfafaf;
 }
 
 .page > h1 {
