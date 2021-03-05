@@ -57,7 +57,7 @@ body {
 }
 
 .indicator {
-  z-index: 5;
+  z-index: 60;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -107,7 +107,7 @@ body {
 .indicator.show {
   left: 95%;
   width: 20px;
-  height: 100px;
+  height: 174px;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
@@ -120,7 +120,7 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   width: 40px;
-  height: 150px;
+  height: 300px;
 }
 
 .dot.active {

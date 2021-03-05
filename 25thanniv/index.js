@@ -144,10 +144,6 @@ function scrollHandle(pEl, data, page) {
 function toggleSideNav() {
     
     indicator.classList.add("show");
-
-    const showIndicator = document.querySelector(".show");
-
-    showIndicator.style.height = (pageElement.length*27)+"px";
     
     clearTimeout(indicatorHide);
 
