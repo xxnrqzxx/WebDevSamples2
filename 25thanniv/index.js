@@ -108,7 +108,7 @@ function resizePage(pageElement) {
     var winHeight = window.innerHeight+"px";
     
     silverconfetti.width = window.innerWidth;
-    headeranniv.width = window.innerWidth - 300;
+    headeranniv.width = window.innerWidth - 500;
     pageElement.forEach(function(pEl) {
         pEl.style.transition = "none";
         pEl.style.width = winWidth;
