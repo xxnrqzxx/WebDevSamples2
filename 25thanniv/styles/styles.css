@@ -94,6 +94,7 @@ body {
   opacity: 0;
   z-index: -2;
   position: absolute;
+  width: 450px;
   top: 55%;
   left: -10%;
   -webkit-transition: all 1s ease;
