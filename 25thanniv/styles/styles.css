@@ -8,7 +8,7 @@ body {
   display: none;
 }
 
-@media only screen and (max-width: 999px) {
+@media only screen and (max-width: 1100px) {
   #content {
     display: none;
   }
@@ -52,6 +52,7 @@ body {
 }
 
 .page > .headeranniv {
+  -webkit-filter: brightness(110%);
   z-index: 2;
   opacity: 0;
   display: -webkit-box;
@@ -64,7 +65,7 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   position: absolute;
-  left: 50%;
+  left: 38%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -96,7 +97,7 @@ body {
   position: absolute;
   width: 400px;
   top: 60%;
-  left: 40%;
+  left: 48%;
   -webkit-transition: all 3s ease;
   transition: all 3s ease;
 }
@@ -111,9 +112,9 @@ body {
   position: absolute;
   height: 800px;
   left: 100%;
-  top: 17%;
-  background-color: rgba(228, 228, 228, 0.5);
-  border: 10px solid black;
+  top: 10%;
+  background-color: white;
+  border: 15px solid black;
   border-radius: 500px;
   -webkit-transition: all 3s ease;
   transition: all 3s ease;
@@ -121,7 +122,7 @@ body {
 
 .page.active > .photo {
   opacity: 1;
-  left: 75%;
+  left: 68%;
 }
 
 .page > .weddingcake {
