@@ -3,6 +3,8 @@ const pages = pageElement.length;
 const sideNav = document.querySelector(".sidenav");
 const indicator = document.querySelector(".indicator");
 const pageNo = document.querySelector(".pageno");
+const headeranniv = document.querySelector(".headeranniv");
+const silverconfetti = document.querySelector(".silverconfetti");
 var dot;
 var indicatorHide = setTimeout(function() {
                         indicator.classList.remove("show");
@@ -100,9 +102,13 @@ window.addEventListener("click", event=> {
 })
 
 function resizePage(pageElement) {
+    
+
     var winWidth = window.innerWidth+"px";
     var winHeight = window.innerHeight+"px";
-
+    
+    silverconfetti.width = window.innerWidth;
+    headeranniv.width = window.innerWidth - 300;
     pageElement.forEach(function(pEl) {
         pEl.style.transition = "none";
         pEl.style.width = winWidth;
