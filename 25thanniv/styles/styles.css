@@ -8,10 +8,6 @@ body {
   display: none;
 }
 
-.first.page {
-  display: none;
-}
-
 @media only screen and (max-width: 1100px) {
   #content {
     display: none;
@@ -70,7 +66,7 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   position: absolute;
-  left: 38%;
+  left: 37%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -102,14 +98,14 @@ body {
   position: absolute;
   width: 400px;
   top: 60%;
-  left: 48%;
+  left: 50%;
   -webkit-transition: all 3s ease;
   transition: all 3s ease;
 }
 
 .page.active > .rings {
   opacity: 1;
-  left: 50%;
+  left: 55%;
 }
 
 .page > .photo {
@@ -128,7 +124,7 @@ body {
 
 .page.active > .photo {
   opacity: 1;
-  left: 68%;
+  left: 67%;
 }
 
 .page > .weddingcake {
@@ -147,9 +143,10 @@ body {
 }
 
 .page > .message {
+  opacity: 0;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 0%;
   background-color: white;
   font-family: cursive;
   font-style: italic;
@@ -162,6 +159,13 @@ body {
   padding: 20px;
   -webkit-box-shadow: 10px 10px 20px;
           box-shadow: 10px 10px 20px;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.page.active > .message {
+  opacity: 1;
+  top: 50%;
 }
 
 .image {
@@ -195,6 +199,68 @@ body {
   top: 60%;
   -webkit-transform: rotate(-5deg);
           transform: rotate(-5deg);
+}
+
+.page > .left {
+  opacity: 0;
+  margin-left: -5px;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.page.active > .left {
+  opacity: 1;
+  margin-left: 0px;
+}
+
+.right {
+  margin-left: 85%;
+}
+
+.image.four {
+  position: absolute;
+  z-index: 3;
+  top: 5%;
+  right: 3%;
+  -webkit-transform: rotate(-5deg);
+          transform: rotate(-5deg);
+  height: 300px;
+}
+
+.image.five {
+  z-index: 2;
+  height: 260px;
+  top: 30%;
+  right: 1%;
+  -webkit-transform: rotate(5deg);
+          transform: rotate(5deg);
+}
+
+.image.six {
+  height: 220px;
+  top: 55%;
+  right: 1%;
+  -webkit-transform: rotate(-5deg);
+          transform: rotate(-5deg);
+}
+
+.image.seven {
+  z-index: -1;
+  top: 72%;
+  right: 1%;
+  height: 250px;
+  -webkit-transform: rotate(-5deg);
+          transform: rotate(-5deg);
+}
+
+.image.eight {
+  position: absolute;
+  left: 69%;
+  top: 68%;
+  z-index: 6;
+  height: 250px;
+  -webkit-transform: rotate(10deg);
+          transform: rotate(10deg);
 }
 
 .hide {
