@@ -8,6 +8,11 @@ body {
     display: none;
 }
 
+//delet dis
+.first.page {
+    display: none;
+}
+
 @media only screen and (max-width: 1100px) {
     #content {
         display: none;
@@ -27,7 +32,7 @@ body {
     position: absolute;
     opacity: 1;
     transition: all 1s ease;
-    background-color: rgb(248, 210, 210);
+    background-image: linear-gradient(white, rgb(248, 210, 210));
 }
 
 // .first.page {
@@ -55,7 +60,7 @@ body {
 }
 
 .page > .headeranniv {
-    -webkit-filter: brightness(110%); 
+    -webkit-filter: brightness(120%); 
     z-index: 2;
     opacity: 0;
     display: flex;
@@ -133,6 +138,50 @@ body {
     opacity: 1;
 }
 
+.page > .message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-color: white;
+    font-family: cursive;
+    font-style: italic;
+    font-size: 30px;
+    width: 1000px;
+    height: 850px;
+    border: 1px solid black;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    box-shadow: 10px 10px 20px;
+}
+
+.image {
+    position: absolute;
+    border: 5px solid white;
+    box-shadow: 5px 5px 20px;
+}
+
+.image.one {
+    z-index: 3;
+    height: 350px;
+    left: 5%;
+    top: 5%;
+    transform: rotate(5deg);
+}
+
+.image.two {
+    z-index: 2;
+    height: 250px;
+    left: 2%;
+    top: 40%;
+    transform: rotate(-5deg);
+}
+
+.image.three {
+    height: 350px;
+    left: 5%;
+    top: 60%;
+    transform: rotate(-5deg);
+}
 
 .hide {
     opacity: 0;
@@ -190,7 +239,7 @@ body {
 .indicator.show {
     left: 95%;
     width: 20px;
-    height: 174px; //+29
+    height: 87px; //+29
     transition: all 0.3s ease;
 }
 
@@ -198,7 +247,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 40px;
-    height: 300px; //+50
+    height: 150px; //+50
 }
 
 .dot.active {
