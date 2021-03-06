@@ -9,7 +9,7 @@ body {
 }
 
 //delet dis
-// .first.page {
+// .first.page, .second.page {
 //     display: none;
 // }
 
@@ -263,6 +263,17 @@ body {
 .page.active > .gold > .image {
     opacity: 1;
     top: 70%;
+}
+
+.page > .pets > .cats {
+    height: 895px;
+    position: absolute;
+    top: 100%;
+    transition: all 2s ease;
+}
+
+.page.active > .pets > .cats {
+    top: 15%;
 }
 
 .hide {
