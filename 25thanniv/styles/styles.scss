@@ -191,19 +191,26 @@ body {
     transform: rotate(-5deg);
 }
 
-.page > .left {
+.page > .left > .image {
     opacity: 0;
-    margin-left: -5px;
+    left: -10%;
     transition: all 1s ease;
 }
 
-.page.active > .left {
+.page.active > .left > .image {
     opacity: 1;
-    margin-left: 0px;
+    left: 5%;
 }
 
-.right {
-    margin-left: 85%;
+.page > .right > .image {
+    opacity: 0;
+    right: -10%;
+    transition: all 1s ease;
+}
+
+.page.active > .right > .image {
+    opacity: 1;
+    right: 1%;
 }
 
 .image.four {
@@ -245,6 +252,17 @@ body {
     z-index: 6;
     height: 250px;
     transform: rotate(10deg);
+}
+
+.page > .gold > .image {
+    opacity: 0;
+    top: 100%;
+    transition: all 1s ease;
+}
+
+.page.active > .gold > .image {
+    opacity: 1;
+    top: 70%;
 }
 
 .hide {
