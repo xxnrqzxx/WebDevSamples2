@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SCP Foundation</title>
+        <style>
+            body {
+                background-color: black;
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            
+
+            .logo{
+                z-index: 1;
+                position: absolute;
+                width: 100%;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .logo > img {
+                width: 100%;
+            }
+
+            .nav {
+                position: relative;
+                z-index: 2;
+                padding: 25px;
+            }
+
+            .navlink {
+                display: block;
+                position: relative;
+                padding: 0.2em 0;
+            }
+
+            .links > ul > li > a{
+                color: white;
+                text-decoration: none;
+                font-size: 30px;
+                transition: all 0.3s ease;
+                overflow: hidden;
+            }
+
+            .navlink::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 0.1em;
+                background-color: rgb(228, 76, 76);
+                opacity: 1;
+                transition: all 0.3s ease;
+                transform: translate3d(-100%, 0, 0);
+            }
+
+            .navlink:not(.active):hover, .navlink:not(.active):active {
+                color: rgb(228, 76, 76);
+            }
+
+            .navlink:not(.active):hover::after, .navlink:not(.active):focus::after {
+                transform: translate3d(0, 0, 0);
+            }
+
+            .navlink.active {
+                font-weight: bold;
+            }
+
+
+            .links > ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .links > ul > li {
+                display: inline-block;
+                margin-right: 20px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="logo">
+                <img src="images/SCP_Foundation.png">
+            </div>
+            <div class="nav">
+                <div class="links">
+                    <ul>
+                        <li><a class="navlink active" href="#">Home</a></li>
+                        <li><a class="navlink" href="#">Articles</a></li>
+                        <li><a class="navlink" href="#">News</a></li>
+                        <li><a class="navlink" href="#">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
