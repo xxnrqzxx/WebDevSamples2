@@ -32,7 +32,7 @@
                 width: 100%;
             }
 
-            .nav-lg {
+            .nav {
                 z-index: 2;
                 display: flex;
                 align-items: center;
@@ -164,6 +164,64 @@
             .form > form > table tr td a:hover {
                 color: red;
             }
+
+            @media screen and (max-width: 420px) {
+                .navlink {
+                    font-size: 20px;
+                }
+
+                .links {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .links > ul > li {
+                    display: block;
+                    text-align: center;
+                    margin-bottom: 15px;
+                }
+
+                .login {
+                    display: flex;
+                    justify-content:center;
+                }
+
+                .nav {
+                    background-color: rgba(3, 13, 68, 0.5);
+                    position: absolute;
+                    top: -50%;
+                    transition: all 0.3s ease;
+                }
+
+                .nav.active {
+                    top: 0%;
+                }
+
+                .hamburger {
+                    z-index: 5;
+                    position: absolute;
+                    height: 200px;
+                    left: 88%;
+                    top: 2%;
+                }
+
+                .line {
+                    width: 35px;
+                    height: 5px;
+                    margin-bottom: 10px;
+                    background-color: white;
+                }
+
+                .form {
+                    right: auto;
+                    top: 60%;
+                }
+
+                .form.active {
+                    top: 160%;
+                    opacity: 1;
+                }
+            }
         </style>
     </head>
     <body>
@@ -171,8 +229,13 @@
             <div class="logo">
                 <img src="images/SCP_Foundation.png">
             </div>
-            <div class="nav-lg">
-                <div class="links col-sm-11">
+            <span class="hamburger">
+                <div class="line first"></div>
+                <div class="line second"></div>
+                <div class="line third"></div>
+            </span>
+            <div class="nav">
+                <div class="links col-sm-11 col-12">
                     <ul>
                         <li><a href="#" class="navlink active">Home</a></li>
                         <li><a href="#" class="navlink">Articles</a></li>
@@ -180,7 +243,7 @@
                         <li><a href="#" class="navlink">About</a></li>
                     </ul>
                 </div>
-                <div class="login col-sm-1">
+                <div class="login col-sm-1 col-12">
                     <button class="login-btn">Log In</button>
                     <div class="form">
                         <form>
@@ -210,10 +273,24 @@
                     const element = event.target;
                     const loginBtn = document.querySelector(".login-btn");
                     const loginForm = document.querySelector(".form");
+                    const nav = document.querySelector(".nav");
+                    const hamburger = document.querySelector(".hamburger");
+
+                    // alert(element.parentElement.className);
+                    if(element.parentElement.className === "hamburger" || element.className === "hamburger") {
+                        nav.classList.add("active");
+                        hamburger.classList.add("close");
+                    } else if(element.classList.contains("close") || element.parentElement.classList.contains("close")) {
+                        nav.classList.remove("active");
+                        hamburger.classList.remove("close");
+                    }
+
 
                     if(element.className === loginBtn.className) {
                         element.classList.add("pressed");
                         loginForm.classList.add("active");
+                        hamburger.classList.remove("close");
+                        nav.classList.remove("active");
                     } else if(!(element.className === "") || !(element.parentElement.classList.length == 0)) {
                         loginBtn.classList.remove("pressed");
                         loginForm.classList.remove("active");
