@@ -32,7 +32,7 @@
                 width: 100%;
             }
 
-            .nav {
+            .nav-lg {
                 z-index: 2;
                 display: flex;
                 align-items: center;
@@ -71,7 +71,7 @@
                 background-color: rgb(228, 76, 76);
                 opacity: 1;
                 transition: all 0.3s ease;
-                transform: translate3d(-100%, 0, 0);
+                transform: translate3d(-100%, -100%, 0);
             }
 
             .navlink:not(.active):hover, .navlink:not(.active):focus {
@@ -79,7 +79,7 @@
             }
 
             .navlink:not(.active):hover::after, .navlink:not(.active):focus::after {
-                transform: translate3d(0, 0, 0);
+                transform: translate3d(0, -100%, 0);
             }
 
             .navlink.active {
@@ -101,21 +101,25 @@
                 display: none;
             }
 
-            .login > button {
+            button {
                 background-color: rgb(228, 76, 76);
                 border: none;
                 border-radius: 15px;
-                padding: 10px;
+                padding: 5px;
+                color: white;
                 width: 100px;
                 font-size: 20px;
-                color: white;
             }
 
-            .login > button:hover {
+            .login > button {
+                padding: 10px;
+            }
+
+            button:hover {
                 background-color: rgb(223, 91, 91);
             }
 
-            .login > button:active, .login > button:focus {
+            button:active, .login > button:focus {
                 background-color: rgb(223, 46, 46);
                 color: rgb(160, 160, 160);
             }
@@ -133,7 +137,6 @@
                 transition: all 0.3s ease;
                 background-color: white;
             }
-
 
 
             .form.active {
@@ -168,7 +171,7 @@
             <div class="logo">
                 <img src="images/SCP_Foundation.png">
             </div>
-            <div class="nav col-sm-12">
+            <div class="nav-lg">
                 <div class="links col-sm-11">
                     <ul>
                         <li><a href="#" class="navlink active">Home</a></li>
@@ -180,7 +183,7 @@
                 <div class="login col-sm-1">
                     <button class="login-btn">Log In</button>
                     <div class="form">
-                        <form class="entry">
+                        <form>
                            <table>
                                <tr>
                                    <td>Username:</td>
@@ -207,7 +210,6 @@
                     const element = event.target;
                     const loginBtn = document.querySelector(".login-btn");
                     const loginForm = document.querySelector(".form");
-                    const entry = document.querySelector(".entry");
 
                     if(element.className === loginBtn.className) {
                         element.classList.add("pressed");
