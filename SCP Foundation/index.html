@@ -99,11 +99,15 @@
         }
 
         .login-btn {
-            display: block;
+            position: relative;
+            opacity: 1;
+            z-index: 3;
+            transition: all 0.3s ease;
         }
 
         .login-btn.pressed {
-            display: none;
+            opacity: 0;
+            z-index: -1;
         }
 
         button {
@@ -179,26 +183,23 @@
 
         @media screen and (max-width: 420px) {
             .navlink {
-                font-size: 25px;
+                font-size: 30px;
             }
 
             .links {
                 display: flex;
                 justify-content: center;
-                border: 1px solid red;
             }
 
             .links>ul>li {
                 display: block;
                 text-align: center;
-                margin-bottom: 20px;
+                margin-bottom: 50px;
             }
 
             .login {
                 top: 0%;
                 display: flex;
-                /* justify-content: center; */
-                border: 1px solid red;
             }
 
             .nav {
@@ -209,10 +210,11 @@
                 transition: all 0.3s ease;
                 display: flex;
                 align-items: center;
+                clip-path:circle(20px at 105% -10%);
             }
 
             .nav.active {
-                top: 0%;
+                clip-path:circle(200% at 105% -10%);
             }
 
             .hamburger {
@@ -248,6 +250,13 @@
                 top: -5%;
                 opacity: 0;
             }
+
+            .login > button {
+                font-size: 30px;    
+                width: auto;
+                padding: 15px;
+            }
+
             .form {
                 opacity: 0;
                right: auto;
@@ -255,8 +264,9 @@
                top: -330%;
             }
 
+
             .form.active {
-                top: -300%;
+                top: -200%;
                 right: auto;
                left: auto;
                 opacity: 1;
@@ -325,20 +335,22 @@
                 const hamburger = document.querySelector(".hamburger");
 
                 
+                // alert(element.classList+" - "+element.parentElement.classList);
+
                 if (element.parentElement.className === "hamburger" || element.className === "hamburger") {
                     nav.classList.add("active");
                     hamburger.classList.add("close");
                 } else if (element.classList.contains("close") || element.parentElement.classList.contains("close")) {
                     nav.classList.remove("active");
                     hamburger.classList.remove("close");
+                    loginForm.classList.remove("active");
+                    loginBtn.classList.remove("pressed");
                 }
 
 
                 if (element.className === loginBtn.className) {
                     element.classList.add("pressed");
                     loginForm.classList.add("active");
-                    hamburger.classList.remove("close");
-                    nav.classList.remove("active");
                 } else if (element.parentElement.className === "close-btn") {
                     loginBtn.classList.remove("pressed");
                     loginForm.classList.remove("active");
