@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JS Cursor Location Example</title>
+        <style>
+            /* html {
+                cursor: none;
+            } */
+
+            body {
+                overflow: hidden;
+            }
+            .cursor {
+                z-index: -1;
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                background-color: yellow;
+                border-radius: 500px;
+                left: -13px;
+                top: -7px;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="cursor"></div>
+        <h3>Move mouse cursor and the div element will follow it.</h3>
+        <h3>Use scroll to increase or decrease circle size.</h3>
+
+        <h3>Links</h3>
+        <ul>
+            <li><a href="https://www.duckduckgo.com">DuckDuckGo</a></li>
+            <li><a href="https://www.google.com">Google</a></li>
+            <li><a href="https://www.yahoo.com">Yahoo</a></li>
+            <li><a href="https://www.bing.com">Bing</a></li>
+        </ul>
+        
+        <script>
+            const cursor = document.querySelector('.cursor');
+            const links = document.querySelectorAll('a');
+
+            window.addEventListener("mousemove", function(e){
+                let x = e.clientX+'px';
+                let y = e.clientY+'px';
+
+                cursor.style.display = "block";
+                cursor.style.margin = y+" "+x;
+                console.log(x, y);
+            });
+
+            window.addEventListener("wheel", function(e){
+                let width;
+                let height;
+                
+                if(e.deltaY < 0) {
+                    width = cursor.offsetWidth + Math.abs(e.deltaY);
+                    height = width;
+                    cursor.style.width = width+'px';
+                    cursor.style.height = height+'px';
+                } else {
+                    width = cursor.offsetWidth - e.deltaY;
+                    height = width;
+                    cursor.style.width = width+'px';
+                    cursor.style.height = height+'px';
+                }
+            });
+
+            for(let i=0; i < links.length; i++) {
+                links[i].addEventListener("mouseover", function(){
+                cursor.style.backgroundColor = "red";
+            });
+                links[i].addEventListener("mouseout", function(){
+                cursor.style.backgroundColor = "yellow";
+            });
+            }
+
+
+        </script>
+    </body>
+</html>
