@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Location</title>
+    <style>
+        
+        body {
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .character {
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            position: absolute;
+            transition: 3s ease all;
+            margin: 0;
+            border-radius: 25px;
+        }
+
+        .ping {
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            transition: .15s ease all;
+            margin: 100px 100px;
+            background-color: white;
+            border-radius: 100px;
+            opacity: 0;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="character"></div>
+    <div class="ping"></div>
+    <script>
+        const char = document.querySelector('.character');
+        const ping = document.querySelector('.ping');
+
+        window.addEventListener('mousemove', function(e){
+            let x;
+            let y;
+        
+            x = e.clientX+'px';
+            y = e.clientY+'px';
+
+            ping.style['transition'] = 'none';
+            ping.style['margin'] = y+' '+x;
+          
+
+        });
+
+        window.addEventListener("click", function (e) {
+            let x;
+            let y;
+
+            x = e.clientX+'px';
+            y = e.clientY+'px';
+            console.log(x+' , '+y);
+
+            ping.style['transition'] = '.3s ease all';
+            ping.style['opacity'] = 0.5;
+            ping.style['width'] = '100px';
+            ping.style['height'] = '100px';
+            ping.style['left'] = '-50px';
+            ping.style['top'] = '-50px';
+
+            setTimeout(function() {
+                ping.style['opacity'] = 0;
+                ping.style['width'] = '10px';
+                ping.style['height'] = '10px';
+                ping.style['left'] = '0px';
+                ping.style['top'] = '0px';
+            }, 150)
+
+            
+
+            char.style['margin'] = y+' '+x;
+            char.style['left'] = "-13px";
+            char.style['top'] = '-7px';
+        })
+    </script>
+</body>
+
+</html>
