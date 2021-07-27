@@ -27,9 +27,9 @@
             width: 10px;
             height: 10px;
             position: absolute;
-            transition: .15s ease all;
+            transition: .05s ease all;
             margin: 100px 100px;
-            background-color: white;
+            border: 5px solid white;
             border-radius: 100px;
             opacity: 0;
             top: 0px;
@@ -40,46 +40,54 @@
 
 <body>
     <div class="character"></div>
-    <div class="ping"></div>
+    <!-- <div class="ping"></div> -->
     <script>
         const char = document.querySelector('.character');
-        const ping = document.querySelector('.ping');
+        // const ping = document.querySelector('.ping');
 
-        window.addEventListener('mousemove', function(e){
-            let x;
-            let y;
+        // window.addEventListener('mousemove', function(e){
+        //     let x;
+        //     let y;
         
-            x = e.clientX+'px';
-            y = e.clientY+'px';
+        //     x = e.clientX+'px';
+        //     y = e.clientY+'px';
 
-            ping.style['transition'] = 'none';
-            ping.style['margin'] = y+' '+x;
+        //     ping.style['transition'] = 'none';
+        //     ping.style['margin'] = y+' '+x;
           
 
-        });
+        // });
 
         window.addEventListener("click", function (e) {
             let x;
             let y;
 
+            const div = document.createElement('div');
+
+            div.className = 'ping';
+
+            document.body.appendChild(div);
+
             x = e.clientX+'px';
             y = e.clientY+'px';
             console.log(x+' , '+y);
 
-            ping.style['transition'] = '.3s ease all';
-            ping.style['opacity'] = 0.5;
-            ping.style['width'] = '100px';
-            ping.style['height'] = '100px';
-            ping.style['left'] = '-50px';
-            ping.style['top'] = '-50px';
+            div.style['margin'] = y+' '+x;
+            div.style['transition'] = '.3s ease all';
+            div.style['opacity'] = 0.5;
+            div.style['width'] = '100px';
+            div.style['height'] = '100px';
+            div.style['left'] = '-50px';
+            div.style['top'] = '-50px';
+
 
             setTimeout(function() {
-                ping.style['opacity'] = 0;
-                ping.style['width'] = '10px';
-                ping.style['height'] = '10px';
-                ping.style['left'] = '0px';
-                ping.style['top'] = '0px';
-            }, 150)
+                div.style['opacity'] = 0;
+                div.style['width'] = '10px';
+                div.style['height'] = '10px';
+                div.style['left'] = '0px';
+                div.style['top'] = '0px';
+            }, 50)
 
             
 

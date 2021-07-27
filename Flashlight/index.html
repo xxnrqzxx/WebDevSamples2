@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Flashlight</title>
+        <style>
+            body {
+                overflow: hidden;
+                margin: 0;
+            }
+
+            .light {
+                z-index: 2;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                margin: 0;
+                background: url('darkcorridor.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                clip-path:circle(500px at 100px 100px);
+                filter: brightness(100%);
+                display: none;
+            }
+
+            .light-lens {
+                z-index: 3;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                margin: 0;
+                background: url('darkcorridor.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                clip-path:circle(450px at 100px 100px);
+                filter: brightness(150%);
+                display: none;
+            }
+
+            .light-lens2 {
+                z-index: 3;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                margin: 0;
+                background: url('darkcorridor.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                clip-path:circle(250px at 100px 100px);
+                filter: brightness(200%);
+                display: none;
+            }
+
+            .light.active, .light-lens.active, .light-lens2.active {
+                display: block;
+            }
+
+            .corridor {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                margin: 0;
+                background: url('darkcorridor.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                filter: brightness(40%);
+            }
+
+            .easteregg {
+                z-index: 5;
+                margin: 700px 500px;
+                width: 30px;
+                height: 30px;
+                position: fixed;
+                cursor: pointer;
+                /* border: 2px solid red; */
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <audio class="knock" src="knocking.mp3"></audio>
+        <div class="corridor"></div>
+        <div class="light"></div>
+        <div class="light-lens"></div>
+        <div class="light-lens2"></div>
+        <div class="easteregg"></div>
+        <script>
+            const knock = document.querySelector('.knock');
+            const light = document.querySelector('.light');
+            const lightLens = document.querySelector('.light-lens');
+            const lightLens2 = document.querySelector('.light-lens2');
+            const easterEgg = document.querySelector('.easteregg');
+
+            window.addEventListener('DOMContentLoaded', function() {
+                let x = Math.floor(Math.random()*1500) + 'px';
+                let y = Math.floor(Math.random()*700) + 'px';
+                
+                easterEgg.style['margin'] = y+' '+x;
+            });
+
+            window.addEventListener('mousemove', function(e){
+                let x = e.clientX+'px';
+                let y = e.clientY+'px';
+
+                
+
+                light.style['clip-path'] = 'circle(500px at '+x+' '+y;
+                lightLens.style['clip-path'] = 'circle(450px at '+x+' '+y;
+                lightLens2.style['clip-path'] = 'circle(250px at '+x+' '+y;
+            });
+
+            window.addEventListener('click', function(e){
+                if(!e.target.classList.contains('easteregg')) {
+                    if(!light.classList.contains('active')) {
+                        light.className += ' active';
+                        lightLens.className += ' active';
+                        lightLens2.className += ' active';
+                    } else {
+                        light.classList.remove('active');
+                        lightLens.classList.remove('active');
+                        lightLens2.classList.remove('active');
+                    }
+                }
+            });
+
+            easterEgg.addEventListener('click', function(){
+                knock.play();
+                setTimeout(function(){
+                    window.location.href = 'hello.html';
+                }, 5000);
+                
+            });
+
+        </script>
+    </body>
+</html>
