@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scroll without scroll wheel or scroll bar</title>
+    </head>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        ::-moz-scrollbar {
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        ::-ms-scrollbar {
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+
+        .image {
+            width: 3000px;
+            height: 3000px;
+            background: url('https://picsum.photos/id/237/3000/3000');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .up {
+            position: fixed;
+            width: 50px;
+            height: 30px;
+            background-color: red;
+            opacity: 0.3;
+            margin: 0;
+            top: 0%;
+            left: 50%
+        }
+
+        .left {
+            opacity: 0.3;
+            position: fixed;
+            width: 30px;
+            height: 50px;
+            background-color: red;
+            margin: 0;
+            top: 50%;
+            left: 0%;
+        }
+
+        .down {
+            opacity: 0.3;
+            position: fixed;
+            width: 50px;
+            height: 30px;
+            background-color: red;
+            margin: 0;
+            top: 97%;
+            left: 50%;
+        }
+
+        .right {
+            opacity: 0.3;
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            margin: 0;
+            top: 50%;
+            left: 98%;
+        }
+
+        .topLeft {
+            position: fixed;
+            width: 50px;
+            height: 30px;
+            background-color: red;
+            opacity: 0.3;
+            margin: 0;
+            top: 0%;
+            left: 0%
+        }
+
+        .topRight {
+            position: fixed;
+            width: 50px;
+            height: 30px;
+            background-color: red;
+            opacity: 0.3;
+            margin: 0;
+            top: 0%;
+            left: 98%
+        }
+
+        .botLeft {
+            opacity: 0.3;
+            position: fixed;
+            width: 50px;
+            height: 30px;
+            background-color: red;
+            margin: 0;
+            top: 97%;
+            left: 0%;
+        }
+        .botRight {
+            opacity: 0.3;
+            position: fixed;
+            width: 50px;
+            height: 30px;
+            background-color: red;
+            margin: 0;
+            top: 97%;
+            left: 98%;
+        }
+
+        .instructions {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+        }
+
+
+    </style>
+    <body>
+        <div class="image"></div>
+        <div class="up"></div>
+        <div class="left"></div>
+        <div class="down"></div>
+        <div class="right"></div>
+        <div class="topLeft"></div>
+        <div class="topRight"></div>
+        <div class="botLeft"></div>
+        <div class="botRight"></div>
+
+        <div class="instructions"><h1>Hover the cursor over the square rectangles at each side to scroll the view.</h1></div>
+
+        <script>
+            var refreshInterval;
+            
+            window.addEventListener('mouseover', function(e){
+                const element = e.target;
+                if(element.classList.contains('up')) {
+                    clearInterval(refreshInterval);
+                    refreshInterval = setInterval(function(){
+                        scrollBy(0, -1);
+                    }, 0.01);
+                } else if (element.classList.contains('left')) {
+                    clearInterval(refreshInterval);
+                    refreshInterval = setInterval(function(){
+                        scrollBy(-1, 0);
+                    }, 0.01);
+                } else if (element.classList.contains('down')) {
+                    clearInterval(refreshInterval);
+                    refreshInterval = setInterval(function(){
+                        scrollBy(0, 1);
+                    }, 0.01);
+                }  else if (element.classList.contains('right')) {
+                    clearInterval(refreshInterval);
+                    refreshInterval = setInterval(function(){
+                        scrollBy(1, 0);
+                    }, 0.01);
+                } else if (element.classList.contains('topLeft')) {
+                    clearInterval(refreshInterval);
+                    refreshInterval = setInterval(function(){
+                        scrollBy(-1, -1);
+                    }, 0.01);
+                } else if (element.classList.contains('topRight')) {
+                    clearInterval(refreshInterval);
+                    refreshInterval = setInterval(function(){
+                        scrollBy(1, -1);
+                    }, 0.01);
+                } else if (element.classList.contains('botLeft')) {
+                    clearInterval(refreshInterval);
+                    refreshInterval = setInterval(function(){
+                        scrollBy(-1, 1);
+                    }, 0.01);
+                } else if (element.classList.contains('botRight')) {
+                    clearInterval(refreshInterval);
+                    refreshInterval = setInterval(function(){
+                        scrollBy(1, 1);
+                    }, 0.01);
+                } else {
+                    clearInterval(refreshInterval);
+                }
+            });
+        </script>
+    </body>
+</html>

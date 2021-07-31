@@ -7,7 +7,7 @@
         <title>Flashlight</title>
         <style>
             body {
-                overflow: hidden;
+                /* overflow: hidden; */
                 margin: 0;
             }
 
@@ -75,6 +75,8 @@
                 height: 30px;
                 position: fixed;
                 cursor: pointer;
+                background-color: rgba(255, 255, 0, 0.05);
+                border-radius: 50px;
                 /* border: 2px solid red; */
             }
 
@@ -82,14 +84,24 @@
         </style>
     </head>
     <body>
-        <audio class="knock" src="knocking.mp3"></audio>
+        <div>
+            <audio src="bangingSound.mp3" class="banging"></audio>
+            <audio src="doorCreak.mp3" class="doorCreak"></audio>
+            <audio class="knock" src="knocking.mp3"></audio>
+            <audio src="flashlightClick.mp3" class="flashClick"></audio>
+            <audio src="scream.mp3" class="scream"></audio>
+        </div>
         <div class="corridor"></div>
         <div class="light"></div>
         <div class="light-lens"></div>
         <div class="light-lens2"></div>
         <div class="easteregg"></div>
         <script>
+            const banging = document.querySelector('.banging');
+            const doorCreak = document.querySelector('.doorCreak');
+            const click = document.querySelector('.flashClick');
             const knock = document.querySelector('.knock');
+            const scream = document.querySelector('.scream');
             const light = document.querySelector('.light');
             const lightLens = document.querySelector('.light-lens');
             const lightLens2 = document.querySelector('.light-lens2');
@@ -119,16 +131,23 @@
                         light.className += ' active';
                         lightLens.className += ' active';
                         lightLens2.className += ' active';
+                        click.play();
+
                     } else {
                         light.classList.remove('active');
                         lightLens.classList.remove('active');
                         lightLens2.classList.remove('active');
+                        click.play();
                     }
                 }
             });
 
             easterEgg.addEventListener('click', function(){
                 knock.play();
+                setTimeout (function(){
+                    banging.play();
+                    doorCreak.play();
+                }, 3700);
                 setTimeout(function(){
                     window.location.href = 'hello.html';
                 }, 5000);
