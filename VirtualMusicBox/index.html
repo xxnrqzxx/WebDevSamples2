@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Virtual Music Box</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <style>
+            html {
+                height: 100%;
+                zoom: 50%;
+            }
+
+            @media screen and (max-width: 800px) {
+                .warning {
+                    position: absolute;
+                    top: 30%;
+                    left: 30%;
+
+                }
+                .container-fluid {
+                    visibility: hidden;
+                }
+            }
+
+            body {
+                margin: 1px;
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                overflow: hidden;
+                background: rgb(232,159,201);
+                background: -moz-linear-gradient(180deg, rgba(232,159,201,1) 0%, rgba(232,159,201,1) 0%, rgba(255,255,255,1) 75%);
+                background: -webkit-linear-gradient(180deg, rgba(232,159,201,1) 0%, rgba(232,159,201,1) 0%, rgba(255,255,255,1) 75%);
+                background: linear-gradient(180deg, rgba(232,159,201,1) 0%, rgba(232,159,201,1) 0%, rgba(255,255,255,1) 75%);
+            }
+
+            .mbox1, .mbox2, .musicbox1, .musicbox2 {
+                transition: all 0.7s ease;
+            } 
+
+            .musicbox1 > .mbox1, .musicbox2 > .mbox2, .musicbox1Opened > .mbox1Opened, .musicbox2Opened > .mbox2Opened{
+                -webkit-filter: drop-shadow(5px 14px 5px #555555);
+                filter: drop-shadow(5px 14px 6px #555555);
+            }
+
+            .mbox1, .mbox2 {
+                opacity: 1;
+                width: 1200px;
+                cursor: pointer;
+            }
+
+            .musicbox2 {
+                margin-left: 10%;
+            }
+
+            .musicbox1 {
+                margin-left: 10%;
+            }
+
+            .first-section {
+                transition: all 1s ease;
+                z-index: 3;
+                opacity: 1;
+                position: absolute;
+                padding: 15px;
+                /* border: 1px solid blue; */
+                top: 65%;
+                left: 50%;
+                width: 100%;
+                height: 100%;
+                transform: translate(-50%, -50%)
+            }
+
+            .second-section {
+                opacity: 0;
+                transition: all 1s ease;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                top: 0%;
+                position: absolute;
+            }
+
+            .musicbox1Opened, .musicbox2Opened {
+                z-index: 4;
+                opacity: 0;
+                transition: all 1s ease;
+            }
+
+            .mbox1Opened, .mbox2Opened {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                transition: all 1s ease;
+            }
+
+            .play-mbox1, .play-mbox2 {
+                opacity: 1;
+                z-index: 1;
+                position: fixed;
+                top: 80%;
+                left: 48%;
+                transform: translate(-50%, -50%);
+                transition: all 1s ease;
+                color: white;
+                font-size: 100px;
+                width: 400px;
+                height: 200px;
+                background-color: rgba(0, 0, 0, 0.5);
+                border-radius: 100px;
+                cursor: pointer;
+            }
+
+            .play-mbox1:hover, .play-mbox2:hover {
+                background-color: rgba(255,255,255, 0.5);
+                color: black;
+            }
+
+            .mbox2Opened {
+                width: 1200px;
+                height: auto;
+            }
+
+            .mbox1-message, .mbox2-message.active {
+                padding: 50px;
+                font-size: 30px;
+                z-index: 1;
+                opacity: 0;
+                box-shadow: 0px 10px 10px;
+                position: absolute;
+                top: 5%;
+                /* left: 60%; */
+                left: 105%;
+                width: 1200px;
+                height: 1400px;
+                background-color: white;
+                border: 2px solid black;
+                transition: all 3s ease;
+            }
+
+            .mbox2-message {
+                padding: 50px;
+                font-size: 30px;
+                opacity: 0;
+                position: absolute;
+                top: 5%;
+                width: 1200px;
+                height: 1400px;
+                left: 105%;
+                transition: all 3s ease;
+            }
+            
+            .mbox1Message-toggle, .mbox2Message-toggle {
+                z-index: 5;
+                opacity: 0;
+                font-size: 50px;
+                font-weight: bold;
+                border-radius: 50px;
+                height: 100px;
+                width: 100px;
+                color: white;
+                background-color:rgba(0, 0, 0, 0.5);
+                transition: all 0.5s ease;
+                transform: scale(1, 1);
+                position: absolute;
+                left: 95%;
+                top: 50%;
+
+            }
+
+            .mbox1Message-toggle:hover, .mbox2Message-toggle:hover {
+                cursor: pointer;
+                transform: scale(1.2, 1.2);
+            }
+
+            .close-mbox1Message, .close-mbox2Message {
+                padding: 0;
+                z-index: 1;
+                opacity: 0;
+                font-size: 70px;
+                font-weight: bold;
+                color: white;
+                transition: all 0.5s ease;
+                position: absolute;
+                cursor: pointer;
+                top: 2%;
+                left: 2%;
+            }
+
+            .close-mbox1Message:hover, .close-mbox2Message:hover {
+                color: red;
+            }
+
+            .filter1, .filter2 {
+                opacity: 0;
+                z-index: 1;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color:rgba(0, 0, 0, 0.5);
+                transition: all 0.3s ease;
+            }
+
+            .back {
+                z-index: 1;
+                opacity: 1;
+                font-size: 50px;
+                font-weight: bold;
+                border-radius: 50px;
+                height: 100px;
+                width: 100px;
+                color: white;
+                background-color:rgba(0, 0, 0, 0.5);
+                transition: all 0.5s ease;
+                transform: scale(1, 1);
+                position: absolute;
+                left: 2%;
+                top: 2%;
+            }
+
+            .back:hover, .next:hover, .prev:hover {
+                transform: scale(1.2, 1.2);
+                cursor: pointer;
+            }
+
+            .next, .prev {
+                z-index: 1;
+                opacity: 0;
+                font-size: 50px;
+                font-weight: bold;
+                border-radius: 50px;
+                height: 100px;
+                width: 100px;
+                color: white;
+                background-color:rgba(0, 0, 0, 0.5);
+                transition: all 0.5s ease;
+                transform: scale(1, 1);
+                position: absolute;
+            }
+
+            .next {
+                left: 70%;
+            }
+
+            .prev {
+                left: 25%;
+            }
+
+            .img {
+                height: 500px;
+                width: 350px;
+                transition: all 3s ease;
+                margin: auto;
+            }
+
+            .paolo-tim, .papa-mama, .piolo, .weepee {
+                border: 1px solid black;
+            }
+
+            .sophie {
+                opacity: 1;
+                z-index: 0;
+                /* border: 1px solid red; */
+                position: absolute;
+                left: -1%;
+                top: -1%;
+                -webkit-filter: drop-shadow(5px 20px 6px #555555);
+                filter: drop-shadow(5px 20px 6px #555555);
+                transition: all 1s ease;
+            }
+
+
+            .howl {
+                z-index: 0;
+                opacity: 1;
+                top: 1%;
+                position: absolute;
+                left: 76%;
+                -webkit-filter: drop-shadow(5px 6px 5px #555555);
+                filter: drop-shadow(5px 20px 6px #555555);
+                transition: all 1s ease;
+
+            }
+
+            .title {
+                position: relative;
+                z-index: 1;
+                text-shadow: 0px 10px 15px white, 0px -10px 15px white, 10px 0px 15px white, -10px 0px 15px white;
+                transition: all 1s ease;
+            }
+
+            .bdaybanner {
+                width: 2200px;
+                height: auto;
+            }
+
+            .confetti-bg {
+                width: 100%;
+                position: absolute;
+            }
+            
+            .confetti {
+                width: 100%;
+                height: 10%;
+            }
+
+
+
+
+        </style>
+    </head>
+    <body>
+        <div class="d-block d-md-none text-center p-5 warning">
+            Best viewed on a PC
+        </div>
+        <div class="container-fluid">
+            <div class="confetti-bg">
+                <img src="./images/confetti.png" class="confetti" alt="">
+            </div>
+            <div class="title d-flex justify-content-center">
+                <img src="./images/birthdaybanner.png" class="bdaybanner img-fluid" alt="">
+            </div>
+            <img src="./images/sophie.png" class="sophie img-fluid" alt="">
+            <img src="./images/howl.png" class="howl img-fluid" alt="">
+            <div class="row first-section align-items-center">
+                <div class="col-md-6">
+                    <div class="musicbox1">
+                        <img class="mbox1 img-fluid" src="./images/musicbox1_closed_v2.png" alt="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="musicbox2">
+                        <img class="mbox2 img-fluid" src="./images/musicbox2_closed_v2.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row second-section align-items-center">
+                <div class="back text-center p-3"><</div>
+                <div class="musicbox1Opened">
+                    <div class="filter1"></div>
+                    <img src="./images/musicbox1_opened_v2.png" alt="" class="mbox1Opened img-fluid">
+                    <div class="play-mbox1 paused text-center p-3">PLAY</div>
+                    <div class="close-mbox1Message">X</div>
+                    <div class="mbox1Message-toggle text-center p-3">!</div>
+                    <div class="mbox1-message">
+                        <div class="img">
+                            <img src="./images/papa_mama.jpg" class="papa-mama img-fluid" alt="">
+                        </div>
+                        <h1 class="text-center"><b>Papa Phol</b></h1>
+                        <p>A Happy and a Blessed Birthday to you!&#127801;&#127856;</p>
+                        <p>Wishing you good health and all the best in life. I am so grateful for all the things you've done for us.</p>
+                        <p>You are a blessing in our house with your love and affection towards me and our children. Always take good care of yourself, avoid too much work 'coz you're not getting any younger.&#128522;</p>
+                        <p>As you said, "kinalimutan ko na ang birthday ko". Well, let me remind you that it's your 55th year in this world today.&#128513; Let's cherish every moment of our lives.</p>
+                        <p>Let's celebrate to that even in the pandemic way.</p>
+                        <p>I Love You!!! &#128151;&#128536;</p>
+                        <p><b>-Papa</b>&#128104;</p>
+                    </div>
+                </div>
+                <div class="musicbox2Opened">
+                    <div class="filter2"></div>
+                    <img src="./images/musicbox2_opened_v2.png" alt="" class="mbox2Opened img-fluid">
+                    <div class="play-mbox2 paused text-center p-3">PLAY</div>
+                    <div class="close-mbox2Message">X</div>
+                    <div class="mbox2Message-toggle text-center p-3">!</div>
+                    <div class="mbox2-message one active">
+                        <div class="img">
+                            <img src="./images/piolo.jpg" class="piolo img-fluid" alt="">
+                        </div><br><br>
+                        <h1 class='text-center'><b>Piolo</b></h1><br><br>
+                        <p>Happy 55th Birthday to our best Mama in the World!</p>
+                        <p>We're always thankful for all the things you have done for us. This is the day of your relaxation, rest assured that you will enjoy this day without minding any problems at all.</p>
+                        <p>We love you very much from the bottom of our hearts, more birthdays and blessings to come. And again, Happy 55th Birthday Mama!</p>
+                    </div>
+                    <div class="mbox2-message two">
+                        <div class="img">
+                            <img src="./images/paolo_tim.jpg" class="paolo-tim img-fluid" alt="">
+                        </div>
+                        <h1 class="text-center">Paolo & Tim</h1>
+                        <p>Happy Birthday Tita!</p>
+                        <p>Enjoy your birthday, please don't forget to take good care of yourself while being too busy with your work.</p>
+                        <p>God bless you.</p>
+                        <p><b></b>-Tim</b></p><br>
+                        <p>Happy Birthday Mama!</p>
+                        <p>Mag retire ka na! Para mag alaga nalang nang mga aso/pusa. Joke!</p>
+                        <p>Thank you for your never ending support to us. For giving us the freedom to decide on what we wanted us to be. Soon, matutulungan ko na kayo sa pag papaayos ng bahay sa Q.C.</p>
+                        <p>Enjoy your special day, more pagkain to come. We love you! God bless</p>
+                        <p><b>-Pao</b></p>
+                    </div>
+                    <div class="mbox2-message three">
+                        <div class="img">
+                            <img src="./images/weepee.jpg" class="weepee img-fluid" alt="">
+                        </div><br><br>
+                        <h1 class='text-center'><b>Weepee</b></h1><br>
+                        <p>Happy 55th Birthday Mama Edna!</p>
+                        <p>I hope you are doing well this month, and also enjoy this small project I have created. I made it music box themed because I know how you like to listen to them. These songs are rearranged by yours truly to sound like how a music box would play them. </p>
+                        <p>I would like to thank you Mama, for taking care of us, in spite of all the work loads you and Papa have been busy doing. I hope that the small things that I've been doing, has lessen your work load in the house as well. I am very sorry for the times where I ignore you or not responding immediately to your requests. I wish for you to have great health, less stress from work, and plenty of blessings to come your way. </p>
+                        <p>Again, have a Happy Birthday, and God bless!</p>
+                    </div>
+                    <div class="prev text-center p-3"><</div>
+                    <div class="next text-center p-3">></div>
+                </div>
+                
+            </div>
+        </div>
+        <script>
+            const mbox1 = document.querySelector('.mbox1');
+            const mbox2 = document.querySelector('.mbox2');
+            const firstSection = document.querySelector('.first-section');
+            const secondSection = document.querySelector('.second-section');
+            const mbox1Opened = document.querySelector('.musicbox1Opened');
+            const mbox2Opened = document.querySelector('.musicbox2Opened');
+            const playMbox1 = document.querySelector('.play-mbox1');
+            const playMbox2 = document.querySelector('.play-mbox2');
+
+            const sophie = document.querySelector('.sophie');
+            const howl = document.querySelector('.howl');
+            const title = document.querySelector('.title');
+
+            const mbox1MessageToggle = document.querySelector('.mbox1Message-toggle');
+            const filter1 = document.querySelector('.filter1');
+            const closeMbox1Message = document.querySelector('.close-mbox1Message');
+            const mbox1Message = document.querySelector('.mbox1-message');
+
+            const mbox2MessageToggle = document.querySelector('.mbox2Message-toggle');
+            const filter2 = document.querySelector('.filter2');
+            const closeMbox2Message = document.querySelector('.close-mbox2Message');
+            const mbox2Message = document.querySelectorAll('.mbox2-message');
+            const mbox2Message1 = document.querySelector('.mbox2-message.one');
+            const mbox2Message2 = document.querySelector('.mbox2-message.two');
+            const mbox2Message3 = document.querySelector('.mbox2-message.three');
+            const next = document.querySelector('.next');
+            const prev = document.querySelector('.prev');
+
+            const back = document.querySelector('.back');
+
+
+            const select = new Audio('./sounds/Selection.wav');
+            const hbd = new Audio('./sounds/HBD.wav');
+            const icftf = new Audio('./sounds/ICFTF.wav');
+            const hk = new Audio('./sounds/HK.wav');
+
+            select.volume = 0.1;
+            hbd.volume = 0.1;
+            icftf.volume = 0.1;
+            hk.volume = 0.1;
+
+            document.addEventListener('DOMContentLoaded', function(){
+
+                
+                
+                document.addEventListener('mouseover', function(e){
+                    hbd.loop = true;
+                    hbd.play();
+                    let element = e.target;
+                    
+                    if(element.classList.contains('mbox1')) {
+                        mbox2.style.transform = "scale(1,1)";
+                        mbox1.style.transform = "scale(1.2,1.2)";
+                    } else if(element.classList.contains('mbox2')) {
+                        mbox1.style.transform = "scale(1,1)";
+                        mbox2.style.transform = "scale(1.2,1.2)";
+                    } else {
+                        mbox1.style.transform = "scale(1,1)";
+                        mbox2.style.transform = "scale(1,1)";
+                    }
+                });
+
+                document.addEventListener('click', function(e) {
+                    let element = e.target;
+                    
+
+                    if(element.classList.contains('mbox1')){
+                        hbd.pause();
+                        mbox2.style.opacity = "0";
+                        select.play();
+                        mbox1.style.cursor = "default";
+                        setTimeout(function() {
+                            title.style.opacity = 0;
+                            sophie.style.opacity = 0;
+                            howl.style.opacity = 0;
+                            firstSection.style.opacity = 0;
+                            firstSection.style.zIndex = 1;
+                        }, 2000)
+                        setTimeout(function(){
+                            back.style.zIndex = 5;
+                            playMbox1.style.zIndex = 5;
+                            mbox1Opened.style.opacity = 1;
+                            mbox1Opened.style.zIndex = 3;
+                            secondSection.style.zIndex = 3;
+                            secondSection.style.opacity = 1;
+                            mbox2Opened.style.zIndex = 1;
+                        }, 4000)
+                    } else if(element.classList.contains('mbox2')){
+                        hbd.pause();
+                        mbox1.style.opacity = "0";
+                        select.play();
+                        mbox2.style.cursor = "default";
+                        setTimeout(function() {
+                            title.style.opacity = 0;
+                            sophie.style.opacity = 0;
+                            howl.style.opacity = 0;
+                            firstSection.style.opacity = 0;
+                            firstSection.style.zIndex = 1;
+                        }, 2000);
+                        setTimeout(function(){
+                            back.style.zIndex = 5;
+                            playMbox2.style.zIndex = 5;
+                            mbox2Opened.style.opacity = 1;
+                            mbox2Opened.style.zIndex = 3;
+                            secondSection.style.zIndex = 3;
+                            secondSection.style.opacity = 1;
+                            mbox1Opened.style.zIndex = 1;
+                        }, 4000);
+                    }
+
+                    if(element.classList.contains('play-mbox1')) {
+                        if(playMbox1.classList.contains('paused')) {
+                            playMbox1.innerHTML = "PAUSE";
+                            playMbox1.classList.remove('paused');
+                            playMbox1.classList.add('playing');
+                            icftf.loop = true;
+                            icftf.play();
+                            mbox1MessageToggle.style.opacity = 1;
+                        } else if(playMbox1.classList.contains('playing')) {
+                            playMbox1.innerHTML = "PLAY";
+                            playMbox1.classList.remove('playing');
+                            playMbox1.classList.add('paused');
+                            icftf.pause();
+                        }
+                    } else if(element.classList.contains('play-mbox2')) {
+                        if(playMbox2.classList.contains('paused')) {
+                            playMbox2.innerHTML = "PAUSE";
+                            playMbox2.classList.remove('paused');
+                            playMbox2.classList.add('playing');
+                            hk.loop = true;
+                            hk.play();
+                            mbox2MessageToggle.style.opacity = 1;
+                        } else if(playMbox2.classList.contains('playing')) {
+                            playMbox2.innerHTML = "PLAY";
+                            playMbox2.classList.remove('playing');
+                            playMbox2.classList.add('paused');
+                            hk.pause();
+                        }
+                    }
+
+                    if(element.classList.contains('mbox1Message-toggle')) {
+                        back.style.opacity = 0;
+                        back.style.zIndex = 1;
+                        playMbox1.style.opacity = 0;
+                        playMbox1.style.zIndex = 1;
+                        mbox1MessageToggle.style.opacity = 0;
+                        filter1.style.opacity = 1;
+                        filter1.style.zIndex = 6;
+                        closeMbox1Message.style.opacity = 1;
+                        closeMbox1Message.style.zIndex = 7;
+                        mbox1Message.style.opacity = 1;
+                        mbox1Message.style.left = '30%';
+                        mbox1Message.style.zIndex = 7;
+                    } else if(element.classList.contains('mbox2Message-toggle')) {
+                        back.style.opacity = 0;
+                        back.style.zIndex = 1;
+                        playMbox2.style.opacity = 0;
+                        playMbox2.style.zIndex = 1;
+                        next.style.opacity = 1;
+                        next.style.zIndex = 7;
+                        prev.style.opacity = 1;
+                        prev.style.zIndex = 7;
+                        mbox2MessageToggle.style.opacity = 0;
+                        filter2.style.opacity = 1;
+                        filter2.style.zIndex = 6;
+                        closeMbox2Message.style.opacity = 1;
+                        closeMbox2Message.style.zIndex = 7;
+                        mbox2Message1.classList.add('active');
+                        mbox2Message1.style.opacity = 1;
+                        mbox2Message1.style.left = '30%';
+                        mbox2Message1.style.zIndex = 7;
+                    }
+
+                    if(element.classList.contains('close-mbox1Message')) {
+                        back.style.opacity = 1;
+                        back.style.zIndex = 5;
+                        playMbox1.style.opacity = 1;
+                        playMbox1.style.zIndex = 5;
+                        closeMbox1Message.style.opacity = 0;
+                        closeMbox1Message.style.zIndex = 1;
+                        mbox1Message.style.opacity = 0;
+                        mbox1Message.style.left = '105%';
+                        mbox1MessageToggle.style.opacity = 1;
+                        filter1.style.opacity = 0;
+                        filter1.style.zIndex = 1;
+                    } else if(element.classList.contains('close-mbox2Message')) {
+                        back.style.opacity = 1;
+                        back.style.zIndex = 5;
+                        playMbox2.style.opacity = 1;
+                        playMbox2.style.zIndex = 5;
+                        next.style.opacity = 0;
+                        next.style.zIndex = 1;
+                        prev.style.opacity = 0;
+                        prev.style.zIndex = 1;
+                        closeMbox2Message.style.opacity = 0;
+                        closeMbox2Message.style.zIndex = 1;
+                        for(let i=0 ; i<mbox2Message.length; i++) {
+                            mbox2Message[i].style.opacity = 0;
+                            mbox2Message[i].style.left = '105%';
+                        }
+                        mbox2MessageToggle.style.opacity = 1;
+                        filter2.style.opacity = 0;
+                        filter2.style.zIndex = 1;
+                    }
+
+                    if(element.classList.contains('back')) {
+                        setTimeout(function() {
+                            back.style.zIndex = 1;
+                            mbox2Opened.style.opacity = 0;
+                            mbox2Opened.style.zIndex = 1;
+                            mbox1Opened.style.opacity = 0;
+                            mbox1Opened.style.zIndex = 1;
+                            secondSection.style.zIndex = 1;
+                            secondSection.style.opacity = 0;
+                            icftf.pause();
+                            icftf.currentTime = 0;
+                            hk.pause();
+                            hk.currentTime = 0;
+                        }, 300);
+                        setTimeout(function(){
+                            hbd.loop = true;
+                            hbd.play();
+                            title.style.opacity = 1;
+                            sophie.style.opacity = 1;
+                            howl.style.opacity = 1;
+                            playMbox1.classList.remove('playing');
+                            playMbox1.classList.add('paused');
+                            playMbox1.innerHTML = 'PLAY';
+                            playMbox1.style.opacity = 1;
+                            playMbox1.style.zIndex = 1;
+                            playMbox1.style.cursor = 'pointer';
+                            playMbox2.classList.remove('playing');
+                            playMbox2.classList.add('paused');
+                            playMbox2.innerHTML = 'PLAY';
+                            playMbox2.style.opacity = 1;
+                            playMbox2.style.zIndex = 1;
+                            playMbox2.style.cursor = 'pointer';
+                            firstSection.style.opacity = 1;
+                            firstSection.style.zIndex = 3;
+                            mbox1.style.opacity = 1;
+                            mbox1.style.cursor = 'pointer';
+                            mbox2.style.opacity = 1;
+                            mbox2.style.cursor = 'pointer';
+                        }, 800);
+                    }
+
+                    if(element.classList.contains('next')) {
+                        if(mbox2Message1.classList.contains('active')) {
+                            mbox2Message1.classList.remove('active');
+                            mbox2Message1.style.opacity = 0;
+                            mbox2Message1.style.left = '105%';
+                            mbox2Message2.classList.add('active')
+                            mbox2Message2.style.opacity = 1;
+                            mbox2Message2.style.left = '30%';
+                            mbox2Message2.style.zIndex = 7;
+                        } else if (mbox2Message2.classList.contains('active')) {
+                            mbox2Message2.classList.remove('active');
+                            mbox2Message2.style.opacity = 0;
+                            mbox2Message2.style.left = '105%';
+                            mbox2Message3.classList.add('active')
+                            mbox2Message3.style.opacity = 1;
+                            mbox2Message3.style.left = '30%';
+                            mbox2Message3.style.zIndex = 7;
+                        }
+                    } else if(element.classList.contains('prev')) {
+                        if(mbox2Message2.classList.contains('active')) {
+                            mbox2Message2.classList.remove('active');
+                            mbox2Message2.style.opacity = 0;
+                            mbox2Message2.style.left = '105%';
+                            mbox2Message1.classList.add('active')
+                            mbox2Message1.style.opacity = 1;
+                            mbox2Message1.style.left = '30%';
+                            mbox2Message1.style.zIndex = 7;
+                        } else if(mbox2Message3.classList.contains('active')) {
+                            mbox2Message3.classList.remove('active');
+                            mbox2Message3.style.opacity = 0;
+                            mbox2Message3.style.left = '105%';
+                            mbox2Message2.classList.add('active')
+                            mbox2Message2.style.opacity = 1;
+                            mbox2Message2.style.left = '30%';
+                            mbox2Message2.style.zIndex = 7;
+                        }
+                    }
+
+                    
+                    
+                })
+            });
+        </script>
+    </body>
+</html>
