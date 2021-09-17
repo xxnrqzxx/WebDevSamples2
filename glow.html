@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Glow</title>
+        <style>
+            body {
+                background: black;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .sphere {
+                position: absolute;
+                background-color: grey;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 300px;
+                height: 300px;
+                border-radius: 500px;
+                filter: drop-shadow(0px 0px 10px white);
+                transition: all 3s ease;
+            }
+
+            .sphere.glow {
+                filter: drop-shadow(0px 0px 20px white);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="sphere">
+        </div>
+
+        <script>
+
+            const sphere = document.querySelector('.sphere')
+
+            document.addEventListener('DOMContentLoaded', function(){
+                setInterval(function(){
+                    if(!sphere.classList.contains('glow')){
+                        sphere.classList.add('glow');
+                    } else {
+                        sphere.classList.remove('glow');
+                    }
+                }, 1600);
+            });
+        </script>
+    </body>
+</html>

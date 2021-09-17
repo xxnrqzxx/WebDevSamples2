@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Control</title>
+        <style>
+            .character {
+                border-radius: 25px;
+                background-color: black;
+                width: 50px;
+                height: 50px;
+                margin: 0;
+                position: absolute;
+                /* transition: all 0.1s ease; */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="character"></div>
+
+        <script>
+            // document.addEventListener('keypress', control);
+            let x = 0;
+            let y = 0;
+            var key = [];
+
+            // function control(e) {
+            //     let code = e.keyCode;
+            //     const char = document.querySelector('.character');
+            //     console.log(code);
+            //     // 100 = right
+            //     // 97 = left
+            //     // 119 = up
+            //     // 115 = down
+
+            //     if(code === 100) {
+            //         x+=3;
+            //         char.style.marginLeft = x + 'px';
+            //         console.log(x);
+            //         console.log(e.type);
+            //     } else if(code === 97) {
+            //         x-=3;
+            //         char.style.marginLeft = x + 'px';
+            //         console.log(x);
+            //     } else if (code === 119) {
+            //         y-=3;
+            //         char.style.marginTop = y + 'px';
+            //     } else if (code === 115) {
+            //         y+=3;
+            //         char.style.marginTop = y + 'px';
+            //     }
+            // }
+
+            // up = 87
+            // left = 65
+            // down = 83
+            // right = 68
+
+
+            document.onkeydown = document.onkeyup = function(e) {
+
+                const char = document.querySelector('.character');
+                e = e || event;
+                key[e.keyCode] = e.type == 'keydown';
+
+                var l = key.length;
+
+                for(i = 0; i < l; i++) {
+                    if(key[i]) {
+                       if(i === 68) {
+                            x+=3;
+                            char.style.marginLeft = x + 'px';
+                       } else if (i === 83) {
+                           y+=3;
+                           char.style.marginTop = y + 'px';
+                       } else if (i === 65) {
+                           x-=3;
+                           char.style.marginLeft = x + 'px';
+                       } else if(i === 87) {
+                           y-=3;
+                           char.style.marginTop = y + 'px';
+                       }
+                       console.log(i);
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
