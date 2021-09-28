@@ -11,6 +11,7 @@
         body {
             background-color: black;
             overflow: hidden;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
 
         .character {
@@ -35,11 +36,29 @@
             top: 0px;
             left: 0px;
         }
+
+        .instructions {
+            
+            border: 2px solid white;
+            position: absolute;
+            padding: 15px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            font-size: 25px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 
 <body>
     <div class="character"></div>
+
+    <div class="instructions">
+        <p>Click anywhere on the screen to move the red circle to that location.</p>
+    </div>
     <!-- <div class="ping"></div> -->
     <script>
         const char = document.querySelector('.character');

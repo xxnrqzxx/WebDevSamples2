@@ -209,9 +209,20 @@
             }
 
             .mbox1Opened-xs, .mbox2Opened-xs {
-                filter: drop-shadow(0px 6px 5px #555555);
-                -webkit-filter: drop-shadow(0px 6px 5px #555555);
+                filter: drop-shadow(0px 6px 3px white) drop-shadow(0px -6px 3px white) drop-shadow(6px 0px 3px white) drop-shadow(-6px 0px 3px white);
+                -webkit-filter: drop-shadow(0px 6px 3px white) drop-shadow(0px -6px 3px white) drop-shadow(6px 0px 3px white) drop-shadow(-6px 0px 3px white);
                 transition: all 0.9s ease;
+            }
+
+            .mbox1Opened-xs.glow, .mbox2Opened-xs.glow {
+                filter: drop-shadow(0px 6px 10px white) drop-shadow(0px -6px 10px white) drop-shadow(6px 0px 10px white) drop-shadow(-6px 0px 10px white);
+                -webkit-filter: drop-shadow(0px 6px 10px white) drop-shadow(0px -6px 10px white) drop-shadow(6px 0px 10px white) drop-shadow(-6px 0px 10px white);
+                transition: all 1s ease;
+            }
+
+            .mbox1Opened-xs.clicked, .mbox2Opened-xs.clicked {
+                filter: drop-shadow(0px 6px 5px rgba(0, 0, 0, 0.5));
+                -webkit-filter: drop-shadow(0px 6px 5px rgba(0, 0, 0, 0.5));
             }
 
             .mbox1Opened-xs:active, .mbox2Opened-xs:active {
@@ -239,25 +250,25 @@
 
                 <div class="row title-xs">
                     <div class="col-12">
-                        <img src="./images/birthdaybanner.png" alt="bdaybanner" class="bdaybanner img-fluid">
+                        <img src="./images/birthdaybanner.png" alt="bdaybanner-xs" class="bdaybanner img-fluid">
                     </div>
                 </div>
 
                 <div class="row dogs-xs">
                     <div class="col-6">
-                        <img src="./images/sophie.png" alt="sophie" class="sophie-xs img-fluid">
+                        <img src="./images/sophie.png" alt="sophie-xs" class="sophie-xs img-fluid">
                     </div>
                     <div class="col-6">
-                        <img src="./images/howl.png" alt="howl" class="howl-xs img-fluid">
+                        <img src="./images/howl.png" alt="howl-xs" class="howl-xs img-fluid">
                     </div>
                 </div>
 
                 <div class="row musicboxes-xs align-items-center">
                     <div class="col-6">
-                        <img src="./images/musicbox1_closed_v2.png" alt="musicbox1" class="mbox1-xs img-fluid">
+                        <img src="./images/musicbox1_closed_v2.png" alt="musicbox1-xs" class="mbox1-xs img-fluid">
                     </div>
                     <div class="col-6">
-                        <img src="./images/musicbox2_closed_v2.png" alt="musicbox2" class="mbox2-xs img-fluid">
+                        <img src="./images/musicbox2_closed_v2.png" alt="musicbox2-xs" class="mbox2-xs img-fluid">
                     </div>
                 </div>
 
@@ -272,7 +283,7 @@
                 <div class="row nav-xs">
                     <div class="col-6">
                         <div class="back-xs">
-                            <
+                            <b><</b>
                         </div>
                     </div>
                     <div class="col-6">
@@ -284,7 +295,7 @@
 
                 <div class="row musicbox1-content-xs">
                     <div class="col-12">
-                        <img src="./images/musicbox1_opened_v2.png" alt="mbox1Opened" class="mbox1Opened-xs img-fluid">
+                        <img src="./images/musicbox1_opened_v2.png" alt="mbox1Opened-xs" class="mbox1Opened-xs img-fluid">
                     </div>
                 </div>
             </div>
@@ -296,10 +307,13 @@
                 const mbox2XS = document.querySelector('.mbox2-xs');
                 const musicbox1ContentXS = document.querySelector('.musicbox1-content-xs');
                 const mbox1MessageToggleXS = document.querySelector('.mbox1MessageToggle-xs');
+                const mbox1OpenedXS = document.querySelector('.mbox1Opened-xs');
 
                 const selection = new Audio('./sounds/Selection.wav');
+                const icftf = new Audio('./sounds/ICFTF.wav');
 
                 selection.volume = 0.2;
+                icftf.volume = 0.2;
 
                 document.addEventListener('DOMContentLoaded', function(){
 
@@ -322,10 +336,20 @@
                                 musicbox1ContentXS.style.opacity = 1;
                                 musicbox1ContentXS.style.zIndex = 3;
                             }, 3000);
+
+                            setInterval(function(){
+                                if(!mbox1OpenedXS.classList.contains('glow')) {
+                                    mbox1OpenedXS.classList.add('glow');
+                                } else {
+                                    mbox1OpenedXS.classList.remove('glow');
+                                }
+                            }, 2000);
                         }
 
                         if(element.classList.contains('mbox1Opened-xs')) {
-                            
+                            mbox1OpenedXS.classList.remove('glow');
+                            mbox1OpenedXS.classList.add('clicked');
+                            icftf.play();
                         }
 
                         if(element.classList.contains('mbox1MessageToggle-xs')) {

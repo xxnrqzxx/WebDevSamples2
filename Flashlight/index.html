@@ -191,10 +191,28 @@
                 /* border: 2px solid red; */
             }
 
+            .instructions {
+                position: fixed;
+                color: white;
+                z-index: 5;
+                border: 1px solid white;
+                padding: 10px;
+                border-radius: 15px;
+                left: 80%;
+                top: 80%;
+                transform: translate(-80%, -80%);
+                text-align: center;
+            }
+
 
         </style>
     </head>
     <body>
+
+        <div class="instructions">
+            <p>Press the Left Mouse Button to open your flashlight. Hover over the Red boxes to Pan the camera to each side.</p>
+        </div>
+
         <div>
             <audio src="bangingSound.mp3" class="banging"></audio>
             <audio src="doorCreak.mp3" class="doorCreak"></audio>

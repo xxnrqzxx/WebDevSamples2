@@ -6,6 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Control</title>
         <style>
+            body {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                overflow: hidden;
+            }
+
             .character {
                 border-radius: 25px;
                 background-color: black;
@@ -15,10 +20,24 @@
                 position: absolute;
                 /* transition: all 0.1s ease; */
             }
+
+            .instructions {
+                border: 2px solid black;
+                border-radius: 15px;
+                position: absolute;
+                padding: 15px;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
         </style>
     </head>
     <body>
         <div class="character"></div>
+
+        <div class="instructions">
+            <p>Press [W], [S], [A], and [D] keys to control the dot.</p>
+        </div>
 
         <script>
             // document.addEventListener('keypress', control);
