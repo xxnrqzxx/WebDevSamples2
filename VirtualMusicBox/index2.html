@@ -1,367 +1,498 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <title>Virtual Music Box</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Virtual Music Box</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
 
-        <style>
-            html, body {
-                height: 100%;
-                overflow: hidden;
-            }
+    <style>
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
 
-            body {
-                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                background: rgba(230, 230, 250, 1.0);
-                background: -webkit-linear-gradient(bottom, rgba(230, 230, 250, 1.0), rgba(232, 159, 201, 1.0));
-                background: -moz-linear-gradient(bottom, rgba(230, 230, 250, 1.0), rgba(232, 159, 201, 1.0));
-                background: linear-gradient(to top, rgba(230, 230, 250, 1.0), rgba(232, 159, 201, 1.0));
-            }
+      body {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        background: rgba(230, 230, 250, 1);
+        background: -webkit-linear-gradient(
+          bottom,
+          rgba(230, 230, 250, 1),
+          rgba(232, 159, 201, 1)
+        );
+        background: -moz-linear-gradient(
+          bottom,
+          rgba(230, 230, 250, 1),
+          rgba(232, 159, 201, 1)
+        );
+        background: linear-gradient(
+          to top,
+          rgba(230, 230, 250, 1),
+          rgba(232, 159, 201, 1)
+        );
+      }
 
-            .container-fluid {
-                /* border: 1px solid black; */
-                padding: 15px;
-                width: 100%;
-                height: 100%;
-            }
+      .container-fluid {
+        /* border: 1px solid black; */
+        padding: 15px;
+        width: 100%;
+        height: 100%;
+      }
 
-            .confetti {
-                /* border: 1px solid red; */
-                position: absolute;
-                z-index: 1;
-                margin: auto;
-                width: 100%;
-                height: 100%;
-            }
+      .confetti {
+        /* border: 1px solid red; */
+        position: absolute;
+        z-index: 1;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+      }
 
-            .confetti-1-xs {
-                position: relative;
-                transform: scale(1.2, 1.2);
-            }
+      .confetti-1-xs {
+        position: relative;
+        transform: scale(1.2, 1.2);
+      }
 
-            .confetti-2-xs {
-                position: relative;
-                transform: scale(1.2, 1.2);
-                top: -10%;
-            }
+      .confetti-2-xs {
+        position: relative;
+        transform: scale(1.2, 1.2);
+        top: -10%;
+      }
 
-            .confetti-3-xs {
-                position: relative;
-                transform: scale(1.2, 1.2);
-                /* border: 1px solid black; */
-                top: -20%;
-            }
+      .confetti-3-xs {
+        position: relative;
+        transform: scale(1.2, 1.2);
+        /* border: 1px solid black; */
+        top: -20%;
+      }
 
-            .confetti-4-xs {
-                position: relative;
-                transform: scale(1.2, 1.2);
-                /* border: 1px solid black; */
-                top: -30%;
-            }
+      .confetti-4-xs {
+        position: relative;
+        transform: scale(1.2, 1.2);
+        /* border: 1px solid black; */
+        top: -30%;
+      }
 
-            .confetti-5-xs {
-                position: relative;
-                transform: scale(1.2, 1.2);
-                /* border: 1px solid black; */
-                top: -37%;
-            }
+      .confetti-5-xs {
+        position: relative;
+        transform: scale(1.2, 1.2);
+        /* border: 1px solid black; */
+        top: -37%;
+      }
 
-            .first-section-xs {
-                z-index: 2;
-                opacity: 1;
-                position: relative;
-                /* border: 1px solid red; */
-                width: 100%;
-                height: 100%;
-                margin: auto;
-                transition: all 1s ease;
-            }
+      .first-section-xs {
+        z-index: 2;
+        opacity: 1;
+        position: relative;
+        /* border: 1px solid red; */
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        transition: all 1s ease;
+      }
 
-            .title-xs {
-                /* border: 1px solid blue; */
+      .title-xs {
+        /* border: 1px solid blue; */
 
-                /* margin: auto; */
-                left: 2%;
-                position: absolute;
-                z-index: 2;
-                top: 6%;
-            }
+        /* margin: auto; */
+        left: 2%;
+        position: absolute;
+        z-index: 2;
+        top: 6%;
+      }
 
-            .bdaybanner {
+      .bdaybanner {
+        filter: drop-shadow(0px 6px 5px #555555);
+        -webkit-filter: drop-shadow(0px 6px 5px #555555);
+        transition: all 0.3s ease;
+        transform: scale(2, 2);
+      }
 
-                filter: drop-shadow(0px 6px 5px #555555);
-                -webkit-filter: drop-shadow(0px 6px 5px #555555);
-                transition: all 0.3s ease;
-                transform: scale(2, 2);
-            }
+      .dogs-xs {
+        z-index: 1;
+        height: 50%;
+        /* border: 1px solid red; */
+        margin: auto;
+        position: absolute;
+        top: 33%;
+        filter: drop-shadow(0px 10px 5px #555555);
+        -webkit-filter: drop-shadow(0px 10px 5px #555555);
+      }
 
-            .dogs-xs {
-                z-index: 1;
-                height: 50%;
-                /* border: 1px solid red; */
-                margin: auto;
-                position: absolute;
-                top: 33%;
-                filter: drop-shadow(0px 10px 5px #555555);
-                -webkit-filter: drop-shadow(0px 10px 5px #555555);
-            }
+      .sophie-xs,
+      .howl-xs {
+        position: relative;
+        /* border: 1px solid black; */
+      }
 
-            .sophie-xs, .howl-xs {
-                position: relative;
-                /* border: 1px solid black; */
-            }
+      .sophie-xs {
+        left: -30%;
+      }
 
-            .sophie-xs {
-                left: -30%;
-            }
+      .howl-xs {
+        width: 900px;
+        left: 15%;
+        top: 15%;
+        transform: scale(1.3, 1.3);
+      }
 
-            .howl-xs {
-                width: 900px;
-                left: 15%;
-                top: 15%;
-                transform: scale(1.3, 1.3)
-            }
+      .musicboxes-xs {
+        z-index: 2;
+        position: absolute;
+        top: 70%;
+        margin: auto;
+      }
 
-            .musicboxes-xs {
-                z-index: 2;
-                position: absolute;
-                top: 70%;
-                margin: auto;
-            }
+      .mbox1-xs,
+      .mbox2-xs {
+        filter: drop-shadow(0px 6px 5px #555555);
+        -webkit-filter: drop-shadow(0px 6px 5px #555555);
+        transition: all 1s ease;
+        /* border: 1px solid blue; */
+      }
 
-            .mbox1-xs, .mbox2-xs {
-                filter: drop-shadow(0px 6px 5px #555555);
-                -webkit-filter: drop-shadow(0px 6px 5px #555555);
-                transition: all 1s ease;
-                /* border: 1px solid blue; */
-            }
+      .mbox1-xs:hover,
+      .mbox2-xs:hover {
+        transform: scale(1.2, 1.2);
+      }
 
-            .mbox1-xs:hover, .mbox2-xs:hover {
-                transform: scale(1.2, 1.2);
-            }
+      .second-section-xs {
+        z-index: 1;
+        opacity: 0;
+        position: absolute;
+        /* border: 1px solid red; */
+        width: 100%;
+        height: 100%;
+        top: 1%;
+        transition: all 1s ease;
+      }
 
-            .second-section-xs {
-                z-index: 1;
-                opacity: 0;
-                position: absolute;
-                /* border: 1px solid red; */
-                width: 100%;
-                height: 100%;
-                top: 1%;
-                transition: all 1s ease;
-            }
+      .filter-xs {
+        transition: all 1s ease;
+        opacity: 0;
+        position: fixed;
+        top: 0%;
+        right: 3%;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+      }
 
-            .filter-xs {
-                transition: all 1s ease;
-                opacity: 0;
-                position: fixed;
-                top: 0%;
-                right: 3%;
-                z-index: 1;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-            }
+      .nav-xs {
+        position: relative;
+        z-index: 2;
+        /* border: 1px solid blue; */
+        padding: 5px;
+        margin-left: -1%;
+      }
 
-            .nav-xs {
-                position: relative;
-                z-index: 2;
-                /* border: 1px solid blue; */
-                padding: 5px;
-                margin-left: -1%;
-            }
+      .back-xs,
+      .mbox1MessageToggle-xs {
+        width: 50px;
+        height: 50px;
+        background: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        color: white;
+        border-radius: 25px;
+        font-size: 30px;
+        font-weight: bold;
+        line-height: 50px;
+        transition: all 1s ease;
+      }
 
-            .back-xs, .mbox1MessageToggle-xs {
-                width: 50px;
-                height: 50px;
-                background: rgba(0, 0, 0, 0.5);
-                text-align: center;
-                color: white;
-                border-radius: 25px;
-                font-size: 30px;
-                line-height: 50px;
-                transition: all 1s ease;
-            }
+      .mbox1MessageToggle-xs {
+        opacity: 0;
+        float: right;
+      }
 
-            .mbox1MessageToggle-xs {
-                z-index: 1;
-                opacity: 0;
-                float: right;
-            }
+      .back-xs:active,
+      .mbox1MessageToggle-xs:active {
+        transform: scale(0.8, 0.8);
+        background: rgb(255, 255, 255);
+        transition: all 0.3s ease;
+        color: black;
+      }
 
-            .back-xs:active, .mbox1MessageToggle-xs:active {
-                transform: scale(0.8, 0.8);
-                background: rgb(255, 255, 255);
-                transition: all 0.3s ease;
-                color: black;
-            }
+      .musicbox1-content-xs {
+        transition: all 1s ease;
+        opacity: 0;
+        position: relative;
+        z-index: 1;
+        /* border: 1px solid red; */
+        margin: auto;
+        top: 15%;
+      }
 
-            .musicbox1-content-xs {
-                opacity: 0;
-                position: relative;
-                z-index: 1;
-                /* border: 1px solid red; */
-                margin: auto;
-                top: 15%;
-            }
+      .mbox1Opened-xs,
+      .mbox2Opened-xs {
+        filter: drop-shadow(0px 6px 3px white) drop-shadow(0px -6px 3px white)
+          drop-shadow(6px 0px 3px white) drop-shadow(-6px 0px 3px white);
+        -webkit-filter: drop-shadow(0px 6px 3px white)
+          drop-shadow(0px -6px 3px white) drop-shadow(6px 0px 3px white)
+          drop-shadow(-6px 0px 3px white);
+        transition: all 0.9s ease;
+      }
 
-            .mbox1Opened-xs, .mbox2Opened-xs {
-                filter: drop-shadow(0px 6px 3px white) drop-shadow(0px -6px 3px white) drop-shadow(6px 0px 3px white) drop-shadow(-6px 0px 3px white);
-                -webkit-filter: drop-shadow(0px 6px 3px white) drop-shadow(0px -6px 3px white) drop-shadow(6px 0px 3px white) drop-shadow(-6px 0px 3px white);
-                transition: all 0.9s ease;
-            }
+      .mbox1Opened-xs.glow,
+      .mbox2Opened-xs.glow {
+        filter: drop-shadow(0px 6px 10px white) drop-shadow(0px -6px 10px white)
+          drop-shadow(6px 0px 10px white) drop-shadow(-6px 0px 10px white);
+        -webkit-filter: drop-shadow(0px 6px 10px white)
+          drop-shadow(0px -6px 10px white) drop-shadow(6px 0px 10px white)
+          drop-shadow(-6px 0px 10px white);
+        transition: all 1s ease;
+      }
 
-            .mbox1Opened-xs.glow, .mbox2Opened-xs.glow {
-                filter: drop-shadow(0px 6px 10px white) drop-shadow(0px -6px 10px white) drop-shadow(6px 0px 10px white) drop-shadow(-6px 0px 10px white);
-                -webkit-filter: drop-shadow(0px 6px 10px white) drop-shadow(0px -6px 10px white) drop-shadow(6px 0px 10px white) drop-shadow(-6px 0px 10px white);
-                transition: all 1s ease;
-            }
+      .mbox1Opened-xs.clicked,
+      .mbox2Opened-xs.clicked {
+        filter: drop-shadow(0px 6px 5px rgba(0, 0, 0, 0.5));
+        -webkit-filter: drop-shadow(0px 6px 5px rgba(0, 0, 0, 0.5));
+      }
 
-            .mbox1Opened-xs.clicked, .mbox2Opened-xs.clicked {
-                filter: drop-shadow(0px 6px 5px rgba(0, 0, 0, 0.5));
-                -webkit-filter: drop-shadow(0px 6px 5px rgba(0, 0, 0, 0.5));
-            }
+      .mbox1Opened-xs:active,
+      .mbox2Opened-xs:active {
+        transform: scale(0.9, 0.9);
+      }
 
-            .mbox1Opened-xs:active, .mbox2Opened-xs:active {
-                transform: scale(0.9, 0.9);
-            }
-
-        </style>
-    </head>
-    <body>
-        <div class="container-fluid">
-
-            <!--Confetti bg-->
-            <div class="row confetti">
-                <div class="col-12 d-block d-sm-none">
-                    <img src="./images/confetti.png" alt="confetti1" class="confetti-1-xs img-fluid">
-                    <img src="./images/confetti.png" alt="confetti2" class="confetti-2-xs img-fluid">
-                    <img src="./images/confetti.png" alt="confetti3" class="confetti-3-xs img-fluid">
-                    <img src="./images/confetti.png" alt="confetti4" class="confetti-4-xs img-fluid">
-                    <img src="./images/confetti.png" alt="confetti5" class="confetti-5-xs img-fluid">
-                </div>
-            </div>
-
-            <!--First scene-->
-            <div class="row first-section-xs d-block d-sm-none">
-
-                <div class="row title-xs">
-                    <div class="col-12">
-                        <img src="./images/birthdaybanner.png" alt="bdaybanner-xs" class="bdaybanner img-fluid">
-                    </div>
-                </div>
-
-                <div class="row dogs-xs">
-                    <div class="col-6">
-                        <img src="./images/sophie.png" alt="sophie-xs" class="sophie-xs img-fluid">
-                    </div>
-                    <div class="col-6">
-                        <img src="./images/howl.png" alt="howl-xs" class="howl-xs img-fluid">
-                    </div>
-                </div>
-
-                <div class="row musicboxes-xs align-items-center">
-                    <div class="col-6">
-                        <img src="./images/musicbox1_closed_v2.png" alt="musicbox1-xs" class="mbox1-xs img-fluid">
-                    </div>
-                    <div class="col-6">
-                        <img src="./images/musicbox2_closed_v2.png" alt="musicbox2-xs" class="mbox2-xs img-fluid">
-                    </div>
-                </div>
-
-            </div>
-
-            <!--Second scene-->
-            <div class="row second-section-xs d-block d-sm-none">
-
-                <div class="row filter-xs">
-                </div>
-
-                <div class="row nav-xs">
-                    <div class="col-6">
-                        <div class="back-xs">
-                            <b><</b>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="mbox1MessageToggle-xs">
-                            !
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row musicbox1-content-xs">
-                    <div class="col-12">
-                        <img src="./images/musicbox1_opened_v2.png" alt="mbox1Opened-xs" class="mbox1Opened-xs img-fluid">
-                    </div>
-                </div>
-            </div>
-
-            <script>
-                const firstSectionXS = document.querySelector('.first-section-xs');
-                const secondSectionXS = document.querySelector('.second-section-xs');
-                const mbox1XS = document.querySelector('.mbox1-xs');
-                const mbox2XS = document.querySelector('.mbox2-xs');
-                const musicbox1ContentXS = document.querySelector('.musicbox1-content-xs');
-                const mbox1MessageToggleXS = document.querySelector('.mbox1MessageToggle-xs');
-                const mbox1OpenedXS = document.querySelector('.mbox1Opened-xs');
-
-                const selection = new Audio('./sounds/Selection.wav');
-                const icftf = new Audio('./sounds/ICFTF.wav');
-
-                selection.volume = 0.2;
-                icftf.volume = 0.2;
-
-                document.addEventListener('DOMContentLoaded', function(){
-
-                    document.addEventListener('click', function(e){
-
-                        const element = e.target;
-                        const style1 = window.getComputedStyle(mbox1MessageToggleXS);
-                        const opacity1 = style1.getPropertyValue('opacity');
-                        console.log(element.className);
-                        console.log(opacity1);
-                        
-                        if(element.classList.contains('mbox1-xs')) {
-                            selection.play();
-                            mbox2XS.style.opacity = 0;
-                            setTimeout(function() {
-                                firstSectionXS.style.opacity = 0;
-                                firstSectionXS.style.zIndex = 1;
-                                secondSectionXS.style.opacity = 1;
-                                secondSectionXS.style.zIndex = 2;
-                                musicbox1ContentXS.style.opacity = 1;
-                                musicbox1ContentXS.style.zIndex = 3;
-                            }, 3000);
-
-                            setInterval(function(){
-                                if(!mbox1OpenedXS.classList.contains('glow')) {
-                                    mbox1OpenedXS.classList.add('glow');
-                                } else {
-                                    mbox1OpenedXS.classList.remove('glow');
-                                }
-                            }, 2000);
-                        }
-
-                        if(element.classList.contains('mbox1Opened-xs')) {
-                            mbox1OpenedXS.classList.remove('glow');
-                            mbox1OpenedXS.classList.add('clicked');
-                            icftf.play();
-                        }
-
-                        if(element.classList.contains('mbox1MessageToggle-xs')) {
-                            if(opacity1 != 0) {
-                                console.log('true');
-                            }
-                        }
-                    });
-
-                });
-            </script>
-
+      .musicbox1-messages-xs {
+        position: absolute;
+        opacity: 0;
+        top: 0%;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <!--Confetti bg-->
+      <div class="row confetti">
+        <div class="col-12 d-block d-sm-none">
+          <img
+            src="./images/confetti.png"
+            alt="confetti1"
+            class="confetti-1-xs img-fluid"
+          />
+          <img
+            src="./images/confetti.png"
+            alt="confetti2"
+            class="confetti-2-xs img-fluid"
+          />
+          <img
+            src="./images/confetti.png"
+            alt="confetti3"
+            class="confetti-3-xs img-fluid"
+          />
+          <img
+            src="./images/confetti.png"
+            alt="confetti4"
+            class="confetti-4-xs img-fluid"
+          />
+          <img
+            src="./images/confetti.png"
+            alt="confetti5"
+            class="confetti-5-xs img-fluid"
+          />
         </div>
-    </body>
+      </div>
+
+      <!--First scene-->
+      <div class="row first-section-xs d-block d-sm-none">
+        <div class="row title-xs">
+          <div class="col-12">
+            <img
+              src="./images/birthdaybanner.png"
+              alt="bdaybanner-xs"
+              class="bdaybanner img-fluid"
+            />
+          </div>
+        </div>
+
+        <div class="row dogs-xs">
+          <div class="col-6">
+            <img
+              src="./images/sophie.png"
+              alt="sophie-xs"
+              class="sophie-xs img-fluid"
+            />
+          </div>
+          <div class="col-6">
+            <img
+              src="./images/howl.png"
+              alt="howl-xs"
+              class="howl-xs img-fluid"
+            />
+          </div>
+        </div>
+
+        <div class="row musicboxes-xs align-items-center">
+          <div class="col-6">
+            <img
+              src="./images/musicbox1_closed_v2.png"
+              alt="musicbox1-xs"
+              class="mbox1-xs img-fluid"
+            />
+          </div>
+          <div class="col-6">
+            <img
+              src="./images/musicbox2_closed_v2.png"
+              alt="musicbox2-xs"
+              class="mbox2-xs img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!--Second scene-->
+      <div class="row second-section-xs d-block d-sm-none">
+        <div class="row filter-xs"></div>
+
+        <div class="row nav-xs">
+          <div class="col-6">
+            <div class="back-xs"><</div>
+          </div>
+          <div class="col-6">
+            <div class="mbox1MessageToggle-xs">!</div>
+          </div>
+        </div>
+
+        <div class="row musicbox1-content-xs">
+          <div class="col-12">
+            <img
+              src="./images/musicbox1_opened_v2.png"
+              alt="mbox1Opened-xs"
+              class="mbox1Opened-xs img-fluid"
+            />
+          </div>
+        </div>
+
+        <div class="row musicbox1-messages-xs">
+          <div class="card first">
+            <img src="images/papa_mama.jpg" alt="" class="card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title text-center">Papa</h5>
+              <p class="card-text">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, nihil? Eos sunt quisquam iure aperiam quo
+                consequuntur itaque ex cupiditate, quod minima quam iusto
+                magnam, id, rerum nulla rem veniam.
+              </p>
+            </div>
+          </div>
+          <div class="card second">
+            <img src="images/papa_mama.jpg" alt="" class="card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title text-center">Papa</h5>
+              <p class="card-text">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque, nihil? Eos sunt quisquam iure aperiam quo
+                consequuntur itaque ex cupiditate, quod minima quam iusto
+                magnam, id, rerum nulla rem veniam.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const firstSectionXS = document.querySelector(".first-section-xs");
+        const secondSectionXS = document.querySelector(".second-section-xs");
+        const mbox1XS = document.querySelector(".mbox1-xs");
+        const mbox2XS = document.querySelector(".mbox2-xs");
+        const musicbox1ContentXS = document.querySelector(
+          ".musicbox1-content-xs"
+        );
+        const mbox1MessageToggleXS = document.querySelector(
+          ".mbox1MessageToggle-xs"
+        );
+        const mbox1OpenedXS = document.querySelector(".mbox1Opened-xs");
+
+        const selection = new Audio("./sounds/Selection.wav");
+        const icftf = new Audio("./sounds/ICFTF.wav");
+
+        selection.volume = 0.2;
+        icftf.volume = 0.2;
+
+        document.addEventListener("DOMContentLoaded", function () {
+          document.addEventListener("click", function (e) {
+            const element = e.target;
+            const style1 = window.getComputedStyle(mbox1MessageToggleXS);
+            const opacity1 = style1.getPropertyValue("opacity");
+            console.log(element.className);
+            console.log(opacity1);
+
+            if (element.classList.contains("mbox1-xs")) {
+              selection.play();
+              mbox2XS.style.opacity = 0;
+              setTimeout(function () {
+                firstSectionXS.style.opacity = 0;
+                firstSectionXS.style.zIndex = 1;
+                secondSectionXS.style.opacity = 1;
+                secondSectionXS.style.zIndex = 2;
+                musicbox1ContentXS.style.opacity = 1;
+                musicbox1ContentXS.style.zIndex = 3;
+              }, 3000);
+
+              setInterval(function () {
+                if (!mbox1OpenedXS.classList.contains("glow")) {
+                  mbox1OpenedXS.classList.add("glow");
+                } else {
+                  mbox1OpenedXS.classList.remove("glow");
+                }
+              }, 2000);
+            }
+
+            if (element.classList.contains("mbox1Opened-xs")) {
+              if (!element.classList.contains("clicked")) {
+                mbox1OpenedXS.classList.remove("glow");
+                mbox1OpenedXS.classList.add("clicked");
+                icftf.loop = true;
+                icftf.play();
+                console.log("played");
+              } else {
+                mbox1OpenedXS.classList.add("glow");
+                mbox1OpenedXS.classList.remove("clicked");
+                icftf.pause();
+                console.log("paused");
+              }
+              mbox1MessageToggleXS.style.opacity = 1;
+            }
+
+            if (element.classList.contains("back-xs")) {
+              secondSectionXS.style.opacity = 0;
+              secondSectionXS.style.zIndex = 1;
+              musicbox1ContentXS.style.opacity = 0;
+              musicbox1ContentXS.style.zIndex = 1;
+              mbox1OpenedXS.classList.remove("clicked");
+              icftf.pause();
+              icftf.currentTime = 0;
+              setTimeout(function () {
+                firstSectionXS.style.opacity = 1;
+                firstSectionXS.style.zIndex = 2;
+                mbox2XS.style.opacity = 1;
+              }, 1000);
+              console.log("back");
+            }
+
+            if (element.classList.contains("mbox1MessageToggle-xs")) {
+              if (opacity1 != 0) {
+                console.log("true");
+              }
+            }
+          });
+        });
+      </script>
+    </div>
+  </body>
 </html>

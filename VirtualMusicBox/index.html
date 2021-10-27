@@ -448,12 +448,12 @@
             hk.volume = 0.1;
 
             document.addEventListener('DOMContentLoaded', function(){
-
+                hbd.loop = true;
+                hbd.play();
                 
                 
                 document.addEventListener('mouseover', function(e){
-                    hbd.loop = true;
-                    hbd.play();
+                    
                     let element = e.target;
                     
                     if(element.classList.contains('mbox1')) {
